@@ -1,13 +1,13 @@
 class Bob
 
   def hey(message)
-    analizer = MessageAnalizer.new(message)
+    analyzer = MessageAnalyzer.new(message)
     case
-      when analizer.silence?
+      when analyzer.silence?
         "Fine. Be that way!"
-      when analizer.shouting?
+      when analyzer.shouting?
         "Woah, chill out!"
-      when analizer.question?
+      when analyzer.question?
         "Sure."
       else
         "Whatever."
@@ -16,7 +16,7 @@ class Bob
 
 end
 
-class MessageAnalizer
+class MessageAnalyzer
 
   attr_reader :message
 
