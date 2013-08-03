@@ -3,14 +3,14 @@ class Bob
   def hey(message)
     analyzer = MessageAnalyzer.new(message)
     case
-      when analyzer.silence?
-        "Fine. Be that way!"
-      when analyzer.shouting?
-        "Woah, chill out!"
-      when analyzer.question?
-        "Sure."
-      else
-        "Whatever."
+    when analyzer.silence?
+      "Fine. Be that way!"
+    when analyzer.shouting?
+      "Woah, chill out!"
+    when analyzer.question?
+      "Sure."
+    else
+      "Whatever."
     end
   end
 
@@ -29,7 +29,7 @@ class MessageAnalyzer
   end
 
   def shouting?
-    message == @message.upcase
+    message == message.upcase
   end
 
   def question?
