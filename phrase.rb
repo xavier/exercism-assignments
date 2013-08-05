@@ -5,7 +5,7 @@ class Phrase
   end
 
   def word_count
-    OccurenceCounter.for(normalized_words).to_hash
+    OccurrenceCounter.for(normalized_words).to_hash
   end
 
   private
@@ -26,7 +26,7 @@ class Phrase
 
 end
 
-class OccurenceCounter
+class OccurrenceCounter
 
   class <<self
 
