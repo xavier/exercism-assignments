@@ -18,10 +18,10 @@ class Phrase
     word.downcase
   end
 
-  SEPARATE_WORDS_WITH_SPACES_OR_PUNCTUATION = /[^\w]+/
+  WORDS = /[\w]+/
 
   def words
-    @string.split(SEPARATE_WORDS_WITH_SPACES_OR_PUNCTUATION)
+    @string.scan(WORDS)
   end
 
 end
