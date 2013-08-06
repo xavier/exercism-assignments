@@ -24,12 +24,8 @@ end
 
 class OccurrenceCounter
 
-  class <<self
-
-    def for(collection)
-      collection.each_with_object(new) { |item, counter| counter.count!(item) }
-    end
-
+  def self.for(collection)
+    collection.each_with_object(new) { |item, counter| counter.count!(item) }
   end
 
   def initialize
