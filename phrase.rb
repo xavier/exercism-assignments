@@ -18,7 +18,7 @@ class Phrase
     word.downcase
   end
 
-  WORDS = /[\w]+/
+  WORDS = /\w+/
 
   def words
     @string.scan(WORDS)
