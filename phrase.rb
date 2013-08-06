@@ -10,18 +10,14 @@ class Phrase
 
   private
 
-  def normalized_words
-    words.map { |word| normalize_word(word) }
-  end
-
-  def normalize_word(word)
-    word.downcase
-  end
-
   WORDS = /\w+/
 
-  def words
-    @string.scan(WORDS)
+  def normalized_words
+    normalized_string.scan(WORDS)
+  end
+
+  def normalized_string
+    @string.downcase
   end
 
 end
