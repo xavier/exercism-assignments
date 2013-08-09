@@ -3,21 +3,17 @@ class Beer
   NEWLINE = "\n"
 
   def verse(bottles)
-    assemble_lines [first_line(bottles), second_line(bottles)]
+    assemble [first_line(bottles), second_line(bottles)]
   end
 
   def sing(from_bottles, bottles_left = 0)
-    assemble_verses verses(from_bottles, bottles_left)
+    assemble verses(from_bottles, bottles_left)
   end
 
   private
 
-  def assemble_lines(lines)
-    lines.join(NEWLINE) + NEWLINE
-  end
-
-  def assemble_verses(verses)
-    verses.inject("") { |song, verse| song + verse + NEWLINE }
+  def assemble(parts)
+    parts.join(NEWLINE) + NEWLINE
   end
 
   def verses(from_bottles, bottles_left)
