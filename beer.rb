@@ -3,21 +3,22 @@ class Beer
   NEWLINE = "\n"
 
   def verse(bottles)
-    assemble [first_line(bottles), second_line(bottles)]
+    assemble first_line(bottles),
+             second_line(bottles)
   end
 
-  def sing(from_bottles, bottles_left = 0)
-    assemble verses(from_bottles, bottles_left)
+  def sing(bottles_available, bottles_left = 0)
+    assemble verses(bottles_available, bottles_left)
   end
 
   private
 
-  def assemble(parts)
-    parts.join(NEWLINE) + NEWLINE
+  def assemble(*parts)
+    Array(parts).join(NEWLINE) + NEWLINE
   end
 
-  def verses(from_bottles, bottles_left)
-    from_bottles.downto(bottles_left).map { |bottles| verse(bottles) }
+  def verses(bottles_available, bottles_left)
+    bottles_available.downto(bottles_left).map { |bottles| verse(bottles) }
   end
 
   def first_line(n)
@@ -25,21 +26,19 @@ class Beer
   end
 
   def second_line(n)
-    if n.zero?
-      NoMoreBeer.new.to_s
-    else
-      TakeBeer.new(n).to_s
-    end
+    (n > 0) ? TakeBeer.new(n).to_s : NoMoreBeer.new.to_s
   end
 
   Line = Struct.new(:bottles) do
 
-    def template
-      ""
-    end
-
     def to_s
       (template % context).capitalize
+    end
+
+    protected
+
+    def template
+      ""
     end
 
     def context
@@ -78,7 +77,7 @@ class Beer
     end
 
     def context
-      {what: take_what_down(bottles), bottles: pluralized_bottles(bottles.pred)}
+      {what: take_what_down(bottles), bottles: pluralized_bottles(bottles-1)}
     end
 
     def take_what_down(count)
