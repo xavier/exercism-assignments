@@ -16,7 +16,7 @@ class SentenceInterpreter:
     self.sentence = sentence or ""
 
   def is_silence(self):
-    return self.sentence == ""
+    return not self.sentence
 
   def is_question(self):
     return self.sentence.endswith("?")
