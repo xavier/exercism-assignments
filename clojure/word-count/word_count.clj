@@ -8,6 +8,4 @@
   (string/lower-case text))
 
 (defn word-count [text]
-  (reduce (fn [counters word] (assoc counters word (inc (counters word 0))))
-          {}
-          (words (normalize text))))
+  (frequencies (words (normalize text))))
