@@ -21,12 +21,12 @@ class Beer
     bottles_available.downto(bottles_left).map { |bottles| verse(bottles) }
   end
 
-  def first_line(n)
-    BottlesOfBeer.new(n).to_s
+  def first_line(bottles)
+    BottlesOfBeer.new(bottles).to_s
   end
 
-  def second_line(n)
-    (n > 0) ? TakeBeer.new(n).to_s : NoMoreBeer.new.to_s
+  def second_line(bottles)
+    (bottles > 0) ? TakeBeer.new(bottles).to_s : NoMoreBeer.new.to_s
   end
 
   Line = Struct.new(:bottles) do
