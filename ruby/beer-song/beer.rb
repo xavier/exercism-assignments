@@ -3,8 +3,7 @@ class Beer
   NEWLINE = "\n"
 
   def verse(bottles)
-    assemble first_line(bottles),
-             second_line(bottles)
+    assemble Verse.new(bottles).lines
   end
 
   def sing(bottles_available, bottles_left = 0)
@@ -21,77 +20,64 @@ class Beer
     bottles_available.downto(bottles_left).map { |bottles| verse(bottles) }
   end
 
-  def first_line(bottles)
-    BottlesOfBeer.new(bottles).to_s
+end
+
+class Verse
+
+  def initialize(bottles)
+    @bottles = bottles
+    @context = VerseContext.new(@bottles)
   end
 
-  def second_line(bottles)
-    (bottles > 0) ? TakeBeer.new(bottles).to_s : NoMoreBeer.new.to_s
+  def lines
+    [first_line, second_line].map { |line| @context.apply(line) }
   end
 
-  Line = Struct.new(:bottles) do
+  private
 
-    def to_s
-      (template % context).capitalize
-    end
-
-    protected
-
-    def template
-      ""
-    end
-
-    def context
-      {}
-    end
-
-    def pluralized_bottles(count)
-      case count
-      when 0
-        "no more bottles"
-      when 1
-        "1 bottle"
-      else
-        "#{count} bottles"
-      end
-    end
-
+  def first_line
+    "%{bottles_available} of beer on the wall, %{bottles_available} of beer."
   end
 
-  class BottlesOfBeer < Line
-
-    def template
-      "%{bottles} of beer on the wall, %{bottles} of beer."
-    end
-
-    def context
-      {bottles: pluralized_bottles(bottles)}
-    end
-
-  end
-
-  class TakeBeer < Line
-
-    def template
-      "Take %{what} down and pass it around, %{bottles} of beer on the wall."
-    end
-
-    def context
-      {what: take_what_down(bottles), bottles: pluralized_bottles(bottles-1)}
-    end
-
-    def take_what_down(count)
-      count == 1 ? "it" : "one"
-    end
-
-  end
-
-  class NoMoreBeer < Line
-
-    def template
+  def second_line
+    if @bottles > 0
+      "Take %{take_what} down and pass it around, %{bottles_left} of beer on the wall."
+    else
       "Go to the store and buy some more, 99 bottles of beer on the wall."
     end
+  end
 
+end
+
+VerseContext = Struct.new(:bottles) do
+
+  def apply(template)
+    (template % context).capitalize
+  end
+
+  def context
+    {
+      bottles_available: pluralized_bottles(bottles),
+      bottles_left: pluralized_bottles(bottles-1),
+      take_what: take_what(bottles)
+    }
+  end
+
+  private
+
+  def pluralized_bottles(count)
+    case count
+    when 0
+      "no more bottles"
+    when 1
+      "1 bottle"
+    else
+      "#{count} bottles"
+    end
+  end
+
+  def take_what(count)
+    count == 1 ? "it" : "one"
   end
 
 end
