@@ -22,15 +22,10 @@ class Beer
 
 end
 
-class Verse
-
-  def initialize(bottles)
-    @bottles = bottles
-    @context = VerseContext.new(@bottles)
-  end
+Verse = Struct.new(:bottles) do
 
   def lines
-    [first_line, second_line].map { |line| @context.apply(line) }
+    [first_line, second_line].map { |line| apply_context(line) }
   end
 
   private
@@ -40,18 +35,14 @@ class Verse
   end
 
   def second_line
-    if @bottles > 0
+    if bottles > 0
       "Take %{take_what} down and pass it around, %{bottles_left} of beer on the wall."
     else
       "Go to the store and buy some more, 99 bottles of beer on the wall."
     end
   end
 
-end
-
-VerseContext = Struct.new(:bottles) do
-
-  def apply(template)
+  def apply_context(template)
     (template % context).capitalize
   end
 
@@ -62,8 +53,6 @@ VerseContext = Struct.new(:bottles) do
       take_what: take_what(bottles)
     }
   end
-
-  private
 
   def pluralized_bottles(count)
     case count
