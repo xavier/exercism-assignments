@@ -6,8 +6,7 @@
 
 (defn- anagram-matcher [word]
   (let [comparable-word (comparable word)]
-    (fn [other-word]
-      (= comparable-word (comparable other-word)))))
+    #(= comparable-word (comparable %1))))
 
 (defn anagrams-for [word candidates]
   (filter (anagram-matcher word) candidates))
