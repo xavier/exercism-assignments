@@ -2,7 +2,7 @@
 (require '[clojure.string :as string])
 
 (defn- comparable [word]
-  (sort (string/lower-case word)))
+  (frequencies (string/lower-case word)))
 
 (defn- anagram-matcher [word]
   (let [comparable-word (comparable word)]
