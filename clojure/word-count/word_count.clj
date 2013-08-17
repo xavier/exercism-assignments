@@ -8,4 +8,7 @@
   (string/lower-case text))
 
 (defn word-count [text]
-  (frequencies (words (normalize text))))
+  (-> text
+      normalize
+      words
+      frequencies))
