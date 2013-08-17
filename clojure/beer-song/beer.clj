@@ -23,10 +23,13 @@
 (defn- assemble [parts]
   (str (string/join separator parts) separator))
 
+(defn- bottles-range [bottles_available bottles_left]
+  (range bottles_available (dec bottles_left) -1))
+
 (defn verse [bottles]
   (assemble [(line1 bottles) (line2 bottles)]))
 
 (defn sing
   ([bottles_available] (sing bottles_available 0))
   ([bottles_available bottles_left]
-    (assemble (map verse (range bottles_available (dec bottles_left) -1)))))
+    (assemble (map verse (bottles-range bottles_available bottles_left)))))
