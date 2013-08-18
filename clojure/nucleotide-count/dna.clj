@@ -2,7 +2,7 @@
 (require '[clojure.string :as string])
 
 (def countable-nucleotides #{"A" "C" "G" "T" "U"})
-(def default-counts {"A" 0, "C" 0, "G" 0, "T" 0})
+(def default-nucleotide-counts {"A" 0, "C" 0, "G" 0, "T" 0})
 
 (defn- nucleotides [sequence]
   (re-seq #"." sequence))
@@ -16,4 +16,4 @@
     (throw (Exception. "invalid nucleotide"))))
 
 (defn nucleotide-counts [sequence]
-  (merge default-counts (frequencies (nucleotides sequence))))
+  (merge default-nucleotide-counts (frequencies (nucleotides sequence))))
