@@ -10,9 +10,12 @@
 (defn- countable-nucleotide? [nucleotide]
   (contains? countable-nucleotides nucleotide))
 
+(defn- nucleotide-counter [nucleotide]
+  #(if (= %2 nucleotide) (inc %1) %1))
+
 (defn count [nucleotide sequence]
   (if (countable-nucleotide? nucleotide)
-    (reduce #(if (= %2 nucleotide) (inc %1) %1) 0 (nucleotides sequence))
+    (reduce (nucleotide-counter nucleotide) 0 (nucleotides sequence))
     (throw (Exception. "invalid nucleotide"))))
 
 (defn nucleotide-counts [sequence]
