@@ -18,7 +18,7 @@
 (defn- second-line [bottles]
   (if (> bottles 0)
     (format "Take %s down and pass it around, %s of beer on the wall." (take-what bottles) (n-bottles (dec bottles)))
-    "Go to the store and buy some more, 99 bottles of beer on the wall."))
+    (format "Go to the store and buy some more, %s of beer on the wall." (n-bottles 99))))
 
 (defn- assemble [parts]
   (str (string/join separator parts) separator))
