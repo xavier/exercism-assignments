@@ -1,8 +1,12 @@
 (ns dna)
 (require '[clojure.string :as string])
+(use '[clojure.set :only [union]])
 
-(def countable-nucleotides #{"A" "C" "G" "T" "U"})
-(def default-nucleotide-counts {"A" 0, "C" 0, "G" 0, "T" 0})
+(def common-nucleotides #{"A" "C" "G"})
+(def dna-nucleotides (conj common-nucleotides "T"))
+(def rna-nucleotides (conj common-nucleotides "U"))
+(def countable-nucleotides (union dna-nucleotides rna-nucleotides))
+(def default-nucleotide-counts (reduce #(assoc %1 %2 0) {} dna-nucleotides))
 
 (defn- nucleotides [sequence]
   (map str sequence))
