@@ -5,7 +5,7 @@
 (def default-nucleotide-counts {"A" 0, "C" 0, "G" 0, "T" 0})
 
 (defn- nucleotides [sequence]
-  (re-seq #"." sequence))
+  (map str sequence))
 
 (defn- countable-nucleotide? [nucleotide]
   (contains? countable-nucleotides nucleotide))
