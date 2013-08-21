@@ -32,7 +32,7 @@
       invalid-number))
 
 ;; I have no idea why re-groups doesn't work here
-(defn- parse-groups [phone-number]
+(defn- split-into-groups [phone-number]
   (rest (re-find (re-matcher regex-parse-groups phone-number))))
 
 (defn number [phone-number]
@@ -42,5 +42,5 @@
   (subs number 0 area-code-length))
 
 (defn pretty-print [phone-number]
-  (apply format pretty-print-format (parse-groups (number phone-number))))
+  (apply format pretty-print-format (split-into-groups (number phone-number))))
 
