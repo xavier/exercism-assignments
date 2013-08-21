@@ -20,7 +20,7 @@
   (re-matches regex-valid-11-digits-number sanitized-phone-number))
 
 (defn- strip-leading-digit [phone-number]
-  (subs phone-number 1 (inc number-length)))
+  (subs phone-number 1))
 
 (defn- normalize [sanitized-phone-number]
   (cond
