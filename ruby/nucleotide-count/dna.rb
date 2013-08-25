@@ -4,19 +4,22 @@ module Nucleotides
 
   IN_DNA = Set.new(%w(A C G T))
   IN_RNA = Set.new(%w(A C G U))
+  ALL    = IN_DNA + IN_RNA
+
+  def self.valid?(nucleotide)
+    ALL.include?(nucleotide)
+  end
 
 end
 
 class DNA
-
-  COUNTABLE_NUCLEOTIDES = Nucleotides::IN_DNA + Nucleotides::IN_RNA
 
   def initialize(sequence)
     @sequence = sequence
   end
 
   def count(nucleotide)
-    raise ArgumentError unless COUNTABLE_NUCLEOTIDES.include?(nucleotide)
+    raise ArgumentError unless Nucleotides.valid?(nucleotide)
     @sequence.count(nucleotide)
   end
 
