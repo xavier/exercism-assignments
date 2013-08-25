@@ -1,6 +1,15 @@
+require "set"
+
+module Nucleotides
+
+  IN_DNA = Set.new(%w(A C G T))
+  IN_RNA = Set.new(%w(A C G U))
+
+end
+
 class DNA
 
-  COUNTABLE_NUCLEOTIDES = %w{A C G T U}
+  COUNTABLE_NUCLEOTIDES = Nucleotides::IN_DNA + Nucleotides::IN_RNA
 
   def initialize(sequence)
     @sequence = sequence
@@ -24,7 +33,7 @@ class DNA
   end
 
   def nucleotide_counters
-    {'A' => 0, 'C' => 0, 'G' => 0, 'T' => 0}
+    Nucleotides::IN_DNA.each_with_object({}) { |n, h| h[n] = 0 }
   end
 
 end
