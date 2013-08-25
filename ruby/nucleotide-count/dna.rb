@@ -1,10 +1,8 @@
-require "set"
-
 module Nucleotides
 
-  IN_DNA = Set.new(%w(A C G T))
-  IN_RNA = Set.new(%w(A C G U))
-  ALL    = IN_DNA + IN_RNA
+  IN_DNA = %w(A C G T)
+  IN_RNA = %w(A C G U)
+  ALL    = IN_DNA | IN_RNA
 
   def self.valid?(nucleotide)
     ALL.include?(nucleotide)
