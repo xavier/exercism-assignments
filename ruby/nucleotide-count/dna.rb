@@ -20,7 +20,7 @@ class DNA
   private
 
   def nucleotides
-    @sequence.split('')
+    @sequence.chars
   end
 
   def nucleotide_counters
