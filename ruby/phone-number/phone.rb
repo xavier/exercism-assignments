@@ -1,40 +1,41 @@
 class Phone
 
-  LENGTH           = 10
-  INVALID          = "0" * LENGTH
   REGEX_SANITIZE   = /[^\d]/
-  REGEX_TRIM_1     = /\A1(\d{#{LENGTH}})\Z/
-  REGEX_PARTS      = /(\d{3})(\d{3})(\d{4})/
-  AREA_CODE_DIGITS = 0..2
+  REGEX_TRIM_1     = /\A1(\d{#{10}})\Z/
+  REGEX_PARTS      = /\A(\d{3})(\d{3})(\d{4})\Z/
+  INVALID          = %w(000 0000 000)
   FORMAT           = "(%s) %s-%s"
 
-  def initialize(number)
-    @number = sanitize(number)
+  def initialize(number_string)
+    @parts = parse(sanitize(number_string))
   end
 
   def number
-    valid? ? @number : INVALID
+    @parts.join
   end
 
   def area_code
-    @number[AREA_CODE_DIGITS]
+    @parts.first
   end
 
   def to_s
-    @number =~ REGEX_PARTS
-    FORMAT % [$1, $2, $3]
+    FORMAT % @parts
   end
 
   private
 
-  def valid?
-    @number.length == LENGTH
-  end
-
-  def sanitize(string)
-    string.
+  def sanitize(number_string)
+    number_string.
       gsub(REGEX_SANITIZE, "").
       gsub(REGEX_TRIM_1, "\\1")
+  end
+
+  def parse(number_string)
+    if REGEX_PARTS =~ number_string
+      [$1, $2, $3]
+    else
+      INVALID
+    end
   end
 
 end
