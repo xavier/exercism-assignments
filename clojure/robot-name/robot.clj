@@ -1,7 +1,9 @@
 ;(ns robot)
 
+(def letters (map char (range (int \A) (int \Z))))
+
 (defn- random-digit [] (rand-int 10))
-(defn- random-letter [] (rand-nth "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+(defn- random-letter [] (rand-nth letters))
 
 (defn- new-robot-name []
   (str (random-letter) (random-letter) (random-digit) (random-digit) (random-digit)))
