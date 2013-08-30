@@ -5,12 +5,14 @@ class DNA
   end
 
   def hamming_distance(other_sequence)
-    comparable_nucleotide_pairs(@sequence, other_sequence).reduce(0) do |d, (n1, n2)|
-      n1 != n2 ? d.succ : d
-    end
+    different_nucleotide_pairs(@sequence, other_sequence).count
   end
 
   private
+
+  def different_nucleotide_pairs(seq1, seq2)
+    comparable_nucleotide_pairs(seq1, seq2).select { |n1, n2| n1 != n2 }
+  end
 
   def comparable_nucleotide_pairs(seq1, seq2)
     comparable_sequence_length = [seq1.size, seq2.size].min
