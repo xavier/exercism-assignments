@@ -11,7 +11,7 @@ class DNA
   private
 
   def nucleotide_sequence_pair(other_sequence)
-    NucleotideSequencesPair.new(nucleotides(@sequence), nucleotides(other_sequence))
+    NucleotidePairs.new(nucleotides(@sequence), nucleotides(other_sequence))
   end
 
   def nucleotides(seq)
@@ -20,7 +20,7 @@ class DNA
 
 end
 
-class NucleotideSequencesPair
+class NucleotidePairs
 
   def initialize(seq1, seq2)
     @seq1, @seq2 = seq1, seq2
