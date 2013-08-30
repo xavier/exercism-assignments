@@ -3,7 +3,7 @@
 (def empty-grade [])
 
 (defn grade [db g]
-  (get db g empty-grade))
+  (db g empty-grade))
 
 (defn add [db student student-grade]
   (assoc db student-grade (conj (grade db student-grade) student)))
