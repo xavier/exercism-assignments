@@ -31,10 +31,10 @@ class NucleotideSequencePair
   end
 
   def comparable
-    pairs.first(comparable_sequence_length)
+    pairs.first(comparable_length)
   end
 
-  def comparable_sequence_length
+  def comparable_length
     [@seq1.size, @seq2.size].min
   end
 
