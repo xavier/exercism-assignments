@@ -5,26 +5,41 @@ class DNA
   end
 
   def hamming_distance(other_sequence)
-    different_nucleotide_pairs(@sequence, other_sequence).count
+    nucleotide_sequence_pair(other_sequence).different.count
   end
 
   private
 
-  def different_nucleotide_pairs(seq1, seq2)
-    comparable_nucleotide_pairs(seq1, seq2).select { |n1, n2| n1 != n2 }
-  end
-
-  def comparable_nucleotide_pairs(seq1, seq2)
-    comparable_sequence_length = [seq1.size, seq2.size].min
-    nucleotide_pairs(seq1, seq2).first(comparable_sequence_length)
-  end
-
-  def nucleotide_pairs(seq1, seq2)
-    nucleotides(seq1).zip(nucleotides(seq2))
+  def nucleotide_sequence_pair(other_sequence)
+    NucleotideSequencePair.new(nucleotides(@sequence), nucleotides(other_sequence))
   end
 
   def nucleotides(seq)
     seq.chars
+  end
+
+end
+
+class NucleotideSequencePair
+
+  def initialize(seq1, seq2)
+    @seq1, @seq2 = seq1, seq2
+  end
+
+  def different
+    comparable.select { |n1, n2| n1 != n2 }
+  end
+
+  def comparable
+    pairs.first(comparable_sequence_length)
+  end
+
+  def comparable_sequence_length
+    [@seq1.size, @seq2.size].min
+  end
+
+  def pairs
+    @seq1.zip(@seq2)
   end
 
 end
