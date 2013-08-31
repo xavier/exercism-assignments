@@ -2,9 +2,9 @@ import re
 
 class Phone:
 
-  REGEX_SANITIZE = re.compile('[^\d]')
-  REGEX_STRIP_1  = re.compile('\A1(\d{10})\Z')
-  REGEX_PARTS    = re.compile('\A(\d{3})(\d{3})(\d{4})\Z')
+  REGEX_SANITIZE = re.compile(r'[^\d]')
+  REGEX_STRIP_1  = re.compile(r'\A1(\d{10})\Z')
+  REGEX_PARTS    = re.compile(r'\A(\d{3})(\d{3})(\d{4})\Z')
   INVALID        = ("000", "000", "0000")
   PRETTY_FORMAT  = "(%s) %s-%s"
 
@@ -20,7 +20,7 @@ class Phone:
 
   def _clean(self, number_string):
     clean = Phone.REGEX_SANITIZE.sub("", number_string)
-    clean = Phone.REGEX_STRIP_1.sub("\\1", clean)
+    clean = Phone.REGEX_STRIP_1.sub(r"\1", clean)
     return clean
 
   def _parse(self, clean_number_string):
