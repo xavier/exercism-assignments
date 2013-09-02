@@ -4,7 +4,9 @@
 (defn- random-letter [] (rand-nth letters))
 
 (defn- new-robot-name []
-  (str (random-letter) (random-letter) (random-digit) (random-digit) (random-digit)))
+  (apply str (concat (repeatedly 2 random-letter) (repeatedly 3 random-digit))))
+
+(new-robot-name)
 
 (defn robot [] (atom (new-robot-name)))
 
