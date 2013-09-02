@@ -1,5 +1,3 @@
-;(ns robot)
-
 (def letters (map char (range (int \A) (int \Z))))
 
 (defn- random-digit [] (rand-int 10))
