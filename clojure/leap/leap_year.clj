@@ -1,5 +1,3 @@
-;(ns leap_year)
-
 (defn- make-divisible-by [divisor]
   #(= (mod %1 divisor) 0))
 
