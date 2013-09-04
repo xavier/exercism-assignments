@@ -3,9 +3,12 @@
 
 (def transform-value-into-key string/lower-case)
 
+(defn- make-key-value-transformer [key-to-turn-into-value]
+  (fn [output value] (assoc output (transform-value-into-key value) key-to-turn-into-value)))
+
 (defn- transform-key-values [output [key values]]
   (reduce
-    (fn [out value] (assoc out (transform-value-into-key value) key))
+    (make-key-value-transformer key)
     output
     values))
 
