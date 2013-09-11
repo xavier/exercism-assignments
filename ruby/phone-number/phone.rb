@@ -1,10 +1,9 @@
 class Phone
 
-  REGEX_SANITIZE   = /[^\d]/
-  REGEX_TRIM_1     = /\A1(\d{#{10}})\Z/
-  REGEX_PARTS      = /\A(\d{3})(\d{3})(\d{4})\Z/
-  INVALID          = %w(000 0000 000)
-  FORMAT           = "(%s) %s-%s"
+  REGEX_SANITIZE = /[^\d]/
+  REGEX_PARTS    = /\A1?(\d{3})(\d{3})(\d{4})\Z/
+  INVALID        = %w(000 0000 000)
+  FORMAT         = "(%s) %s-%s"
 
   def initialize(number_string)
     @parts = parse(sanitize(number_string))
@@ -25,9 +24,7 @@ class Phone
   private
 
   def sanitize(number_string)
-    number_string.
-      gsub(REGEX_SANITIZE, "").
-      gsub(REGEX_TRIM_1, "\\1")
+    number_string.gsub(REGEX_SANITIZE, "")
   end
 
   def parse(number_string)
