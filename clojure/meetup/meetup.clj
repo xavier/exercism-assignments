@@ -46,12 +46,18 @@
 (defn- nth-day-of-week [year month target-day-of-week week-number]
   [year month (advance-day-by-weeks (first-day-of-week year month target-day-of-week) (dec week-number))])
 
-; TODO support leap years
+(defn leap-year? [year]
+  (cond
+    (zero? (mod 400 year)) true
+    (zero? (mod 100 year)) false
+    (zero? (mod 4   year)) true
+    :else                  false))
+
 (defn- days-in-month [year month]
   (condp contains? month
     #{1 3 5 7 8 10 12} 31
     #{4 6 9 11} 30
-    #{2} 28))
+    #{2} (if (leap-year? year) 29 28)))
 
 (defn- last-day-of-week [year month target-day-of-week]
   [year month (backward-to-first year month (days-in-month year month) target-day-of-week)])
