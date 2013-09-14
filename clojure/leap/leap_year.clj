@@ -1,5 +1,5 @@
 (defn- make-divisible-by [divisor]
-  #(= (mod %1 divisor) 0))
+  #(zero? (mod %1 divisor)))
 
 (def divisible-by-4?   (make-divisible-by 4))
 (def divisible-by-100? (make-divisible-by 100))
