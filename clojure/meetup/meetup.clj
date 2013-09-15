@@ -28,17 +28,17 @@
   "(Mon=1, ..., Sun=7)"
   (inc (mod (+ (zeller-day-of-week year month day) 5) 7)))
 
-(defn- advance-to-first [year month day target-day-of-week]
+(defn- forward-to-day-of-week [year month day target-day-of-week]
   (+ day (mod (- target-day-of-week (day-of-week year month day)) 7)))
 
-(defn- backward-to-first [year month day target-day-of-week]
+(defn- rewind-to-day-of-week [year month day target-day-of-week]
   (- day (mod (- (day-of-week year month day) target-day-of-week) 7)))
 
 (defn- first-day-of-week [year month target-day-of-week]
-  (advance-to-first year month 1 target-day-of-week))
+  (forward-to-day-of-week year month 1 target-day-of-week))
 
 (defn- teenth [year month target-day-of-week]
-  [year month (advance-to-first year month 13 target-day-of-week)])
+  [year month (forward-to-day-of-week year month 13 target-day-of-week)])
 
 (defn- advance-day-by-weeks [day weeks]
   (+ day (* weeks 7)))
@@ -60,7 +60,7 @@
     #{2} (if (leap-year? year) 29 28)))
 
 (defn- last-day-of-week [year month target-day-of-week]
-  [year month (backward-to-first year month (days-in-month year month) target-day-of-week)])
+  [year month (rewind-to-day-of-week year month (days-in-month year month) target-day-of-week)])
 
 (defn monteenth    [month year] (teenth year month monday))
 (defn tuesteenth   [month year] (teenth year month tuesday))
