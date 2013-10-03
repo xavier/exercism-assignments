@@ -6,11 +6,11 @@
 (defn- make-key-value-transformer [key-to-turn-into-value]
   (fn [output value] (assoc output (transform-value-into-key value) key-to-turn-into-value)))
 
-(defn- transform-key-values [output [key values]]
+(defn- transform-key-values [output key values]
   (reduce
     (make-key-value-transformer key)
     output
     values))
 
 (defn transform [input]
-  (reduce transform-key-values {} input))
+  (reduce-kv transform-key-values {} input))
