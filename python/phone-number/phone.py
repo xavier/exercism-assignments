@@ -9,14 +9,14 @@ class Phone:
   PRETTY_FORMAT  = "(%s) %s-%s"
 
   def __init__(self, number_string):
-    self.parts  = self._parse(self._clean(number_string))
-    self.number = "".join(self.parts)
+    self.__parts  = self._parse(self._clean(number_string))
+    self.number = "".join(self.__parts)
 
   def area_code(self):
-    return self.parts[0]
+    return self.__parts[0]
 
   def pretty(self):
-    return self.PRETTY_FORMAT % self.parts
+    return self.PRETTY_FORMAT % self.__parts
 
   def _clean(self, number_string):
     clean = self.REGEX_SANITIZE.sub("", number_string)
