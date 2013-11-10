@@ -16,16 +16,16 @@ class Phone:
     return self.parts[0]
 
   def pretty(self):
-    return Phone.PRETTY_FORMAT % self.parts
+    return self.PRETTY_FORMAT % self.parts
 
   def _clean(self, number_string):
-    clean = Phone.REGEX_SANITIZE.sub("", number_string)
-    clean = Phone.REGEX_STRIP_1.sub(r"\1", clean)
+    clean = self.REGEX_SANITIZE.sub("", number_string)
+    clean = self.REGEX_STRIP_1.sub(r"\1", clean)
     return clean
 
   def _parse(self, clean_number_string):
-    match = Phone.REGEX_PARTS.search(clean_number_string)
+    match = self.REGEX_PARTS.search(clean_number_string)
     if match:
       return match.groups()
     else:
-      return Phone.INVALID
+      return self.INVALID
