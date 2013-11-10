@@ -9,7 +9,7 @@ class Phone:
   PRETTY_FORMAT  = "(%s) %s-%s"
 
   def __init__(self, number_string):
-    self.__parts  = self._parse(self._clean(number_string))
+    self.__parts  = self.__parse(self.__clean(number_string))
     self.number = "".join(self.__parts)
 
   def area_code(self):
@@ -18,12 +18,12 @@ class Phone:
   def pretty(self):
     return self.PRETTY_FORMAT % self.__parts
 
-  def _clean(self, number_string):
+  def __clean(self, number_string):
     clean = self.REGEX_SANITIZE.sub("", number_string)
     clean = self.REGEX_STRIP_1.sub(r"\1", clean)
     return clean
 
-  def _parse(self, clean_number_string):
+  def __parse(self, clean_number_string):
     match = self.REGEX_PARTS.search(clean_number_string)
     if match:
       return match.groups()
