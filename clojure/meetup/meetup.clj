@@ -60,13 +60,13 @@
 (defn- last-day-of-week [year month target-day-of-week]
   [year month (rewind-to-day-of-week year month (days-in-month year month) target-day-of-week)])
 
-(defn monteenth    [month year] (teenth year month monday))
-(defn tuesteenth   [month year] (teenth year month tuesday))
-(defn wednesteenth [month year] (teenth year month wednesday))
-(defn thursteenth  [month year] (teenth year month thursday))
-(defn friteenth    [month year] (teenth year month friday))
-(defn saturteenth  [month year] (teenth year month saturday))
-(defn sunteenth    [month year] (teenth year month sunday))
+; Defines monteenth, tuesteenth, ..., sunteenth
+(doall
+  (map-indexed
+    (fn [day-index fun-name]
+      (intern *ns* (symbol fun-name) (fn [month year] (teenth year month (+ monday day-index))))
+    )
+    ["monteenth" "tuesteenth" "wednesteenth" "thursteenth" "friteenth" "saturteenth" "sunteenth"]))
 
 ; Defines <week-name>-monday, <week-name>-tuesday, ... <week-name>-sunday
 (defn- define-nth-day-functions [week-name week-number]
