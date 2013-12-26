@@ -1,12 +1,10 @@
 (ns meetup)
 
-(def monday    1)
-(def tuesday   2)
-(def wednesday 3)
-(def thursday  4)
-(def friday    5)
-(def saturday  6)
-(def sunday    7)
+(def day-names ["monday" "tuesday" "wednesday" "thursday" "friday" "saturday" "sunday"])
+
+; Declare monday=1, tuesday=2, ..., sunday=7
+(doall
+  (map-indexed (fn [day-index day-name] (intern *ns* (symbol day-name) (inc day-index))) day-names))
 
 (defn- zeller-day-of-week
   "Calculates the day of week for the given date using Zeller's congruence (Sat=0, ..., Fri=6)"
@@ -70,42 +68,34 @@
 (defn saturteenth  [month year] (teenth year month saturday))
 (defn sunteenth    [month year] (teenth year month sunday))
 
-(defn first-monday    [month year]  (nth-day-of-week year month monday    1))
-(defn first-tuesday   [month year]  (nth-day-of-week year month tuesday   1))
-(defn first-wednesday [month year]  (nth-day-of-week year month wednesday 1))
-(defn first-thursday  [month year]  (nth-day-of-week year month thursday  1))
-(defn first-friday    [month year]  (nth-day-of-week year month friday    1))
-(defn first-saturday  [month year]  (nth-day-of-week year month saturday  1))
-(defn first-sunday    [month year]  (nth-day-of-week year month sunday    1))
+; Defines <week-name>-monday, <week-name>-tuesday, ... <week-name>-sunday
+(defn- define-nth-day-functions [week-name week-number]
+  (doall
+    (map-indexed
+      (fn [day-index day-name]
+        (let [
+          fun-name (symbol (str week-name "-" day-name))
+          fun-body (fn [month year] (nth-day-of-week year month (+ monday day-index) week-number))]
+          (intern *ns* fun-name fun-body)))
+      day-names)
+    ))
 
-(defn second-monday    [month year] (nth-day-of-week year month monday    2))
-(defn second-tuesday   [month year] (nth-day-of-week year month tuesday   2))
-(defn second-wednesday [month year] (nth-day-of-week year month wednesday 2))
-(defn second-thursday  [month year] (nth-day-of-week year month thursday  2))
-(defn second-friday    [month year] (nth-day-of-week year month friday    2))
-(defn second-saturday  [month year] (nth-day-of-week year month saturday  2))
-(defn second-sunday    [month year] (nth-day-of-week year month sunday    2))
+; Defines first-monday, first-tuesday, ..., second-monday, second-tuesday, ..., fourth-sunday
+(doall
+  (map-indexed
+    (fn [week-index week-name]
+      (define-nth-day-functions week-name (inc week-index))
+    )
+    ["first" "second" "third" "fourth"])
+  )
 
-(defn third-monday    [month year]  (nth-day-of-week year month monday    3))
-(defn third-tuesday   [month year]  (nth-day-of-week year month tuesday   3))
-(defn third-wednesday [month year]  (nth-day-of-week year month wednesday 3))
-(defn third-thursday  [month year]  (nth-day-of-week year month thursday  3))
-(defn third-friday    [month year]  (nth-day-of-week year month friday    3))
-(defn third-saturday  [month year]  (nth-day-of-week year month saturday  3))
-(defn third-sunday    [month year]  (nth-day-of-week year month sunday    3))
-
-(defn fourth-monday    [month year] (nth-day-of-week year month monday    4))
-(defn fourth-tuesday   [month year] (nth-day-of-week year month tuesday   4))
-(defn fourth-wednesday [month year] (nth-day-of-week year month wednesday 4))
-(defn fourth-thursday  [month year] (nth-day-of-week year month thursday  4))
-(defn fourth-friday    [month year] (nth-day-of-week year month friday    4))
-(defn fourth-saturday  [month year] (nth-day-of-week year month saturday  4))
-(defn fourth-sunday    [month year] (nth-day-of-week year month sunday    4))
-
-(defn last-monday    [month year] (last-day-of-week year month monday))
-(defn last-tuesday   [month year] (last-day-of-week year month tuesday))
-(defn last-wednesday [month year] (last-day-of-week year month wednesday))
-(defn last-thursday  [month year] (last-day-of-week year month thursday))
-(defn last-friday    [month year] (last-day-of-week year month friday))
-(defn last-saturday  [month year] (last-day-of-week year month saturday))
-(defn last-sunday    [month year] (last-day-of-week year month sunday))
+; Define last-monday, last-tuesday, ..., last-sunday
+(doall
+  (map-indexed
+    (fn [day-index day-name]
+      (let [
+        fun-name (symbol (str "last-" day-name))
+        fun-body (fn [month year] (last-day-of-week year month (+ monday day-index)))]
+        (intern *ns* fun-name fun-body)))
+    day-names)
+  )
