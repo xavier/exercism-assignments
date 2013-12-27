@@ -3,11 +3,11 @@ package etl
 import "strings";
 
 func Transform(source map[int][]string) map[string]int {
-  var target = make(map[string]int)
+  var transformed = make(map[string]int)
   for score, letters := range source {
     for _, letter := range letters {
-      target[strings.ToLower(letter)] = score
+      transformed[strings.ToLower(letter)] = score
     }
   }
-  return target;
+  return transformed;
 }
