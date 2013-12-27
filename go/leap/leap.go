@@ -1,7 +1,7 @@
 package leap
 
 func IsLeapYear(year int) bool {
-  return isDivisibleBy4(year) && (!isCentury(year) || isExceptionalCentury(year));
+  return isExceptionalCentury(year) || (!isCentury(year) && isDivisibleBy4(year))
 }
 
 func isDivisibleBy4(year int) bool {
