@@ -60,13 +60,16 @@
 (defn- last-day-of-week [year month target-day-of-week]
   [year month (rewind-to-day-of-week year month (days-in-month year month) target-day-of-week)])
 
+(defn- day-name-to-teenth [day-name]
+  (clojure.string/replace day-name "day" "teenth"))
+
 ; Defines monteenth, tuesteenth, ..., sunteenth
 (doall
   (map-indexed
     (fn [day-index fun-name]
       (intern *ns* (symbol fun-name) (fn [month year] (teenth year month (+ monday day-index))))
     )
-    ["monteenth" "tuesteenth" "wednesteenth" "thursteenth" "friteenth" "saturteenth" "sunteenth"]))
+    (map day-name-to-teenth day-names)))
 
 ; Defines <week-name>-monday, <week-name>-tuesday, ... <week-name>-sunday
 (defn- define-nth-day-functions [week-name week-number]
