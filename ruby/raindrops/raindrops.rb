@@ -7,8 +7,16 @@ module Raindrops
   }
 
   def self.convert(n)
-    conversion = WORDS.reduce("") { |s, (prime_factor, word)| (n % prime_factor).zero? ? s + word : s }
-    conversion.empty? ? n.to_s : conversion
+    words = raindrop_words(n)
+    words.empty? ? n.to_s : words
+  end
+
+  private
+
+  def self.raindrop_words(n)
+    WORDS.each_with_object("") do |(prime_factor, word), words|
+      words << word if (n % prime_factor).zero?
+    end
   end
 
 end
