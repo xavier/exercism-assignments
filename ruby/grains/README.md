@@ -1,0 +1,1 @@
+Please upgrade to the latest version of the exercism command-line client. See: http://cli.exercism.io
