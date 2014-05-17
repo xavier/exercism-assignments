@@ -10,7 +10,7 @@ class Proverb
     each_item_pairs do |wanted_item, lost_item|
       proverb << line(wanted_item, lost_item)
     end
-    proverb << last_line(@qualifier, @items.first, )
+    proverb << last_line(@qualifier, @items.first)
   end
 
   private
