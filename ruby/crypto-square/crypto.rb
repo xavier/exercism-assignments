@@ -40,12 +40,8 @@ class Crypto
     segments
   end
 
-  def group_letters(string, n=5)
-    groups = []
-    string.chars.each_slice(n) do |slice|
-      groups << slice.join
-    end
-    groups.join(" ")
+  def group_letters(string)
+    string.gsub(/(\w{5})/, '\1 ').strip
   end
 
 end
