@@ -18,12 +18,8 @@ module Atbash
     sanitized_plaintext.tr(PLAIN, CIPHER)
   end
 
-  def self.group_letters(string, n=5)
-    g = []
-    string.chars.each_slice(n) do |slice|
-      g << slice.join
-    end
-    g.join(" ")
+  def self.group_letters(string)
+    string.gsub(/(\w{5})/, '\1 ').strip
   end
 
 end
