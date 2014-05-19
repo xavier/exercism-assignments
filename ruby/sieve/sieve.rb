@@ -9,7 +9,7 @@ class Sieve
   def primes
     candidates = (2..@upper_bound).to_a
     n = 2
-    while n < @upper_bound do
+    while n < candidates.last do
       candidates.reject! { |c| (c != n) && (c % n).zero? }
       n += 1
     end
