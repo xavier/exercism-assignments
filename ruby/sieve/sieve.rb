@@ -13,6 +13,6 @@ class Sieve
       candidates.reject! { |c| (c != n) && (c % n).zero? }
       n += 1
     end
-    candidates.to_a
+    candidates
   end
 end
