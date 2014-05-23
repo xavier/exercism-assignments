@@ -1,6 +1,8 @@
 class Cipher
 
-  BASE = 'a'.ord
+  ALPHABET_SIZE     = 26
+  BASE              = 'a'.ord
+  RANDOM_KEY_LENGTH = 100
 
   attr_reader :key
 
@@ -28,7 +30,7 @@ class Cipher
   end
 
   def generate_random_key
-    (BASE + Random.rand(26)).chr * 100
+    (BASE + Random.rand(ALPHABET_SIZE)).chr * RANDOM_KEY_LENGTH
   end
 
 
@@ -38,7 +40,7 @@ class Cipher
 
   def transform_with_key(string, &block)
     bytes(string).zip(bytes(key)).map do |c, k|
-      (BASE + block.(c, k) % 26).chr
+      (BASE + block.(c, k) % ALPHABET_SIZE).chr
     end.join
   end
 
