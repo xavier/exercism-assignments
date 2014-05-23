@@ -7,6 +7,7 @@ class Cipher
   def initialize(key = nil)
     if key
       ensure_key_is_valid!(key)
+      @key = key
     else
       @key = generate_random_key
     end
@@ -37,7 +38,7 @@ class Cipher
 
   def transform_with_key(string, &block)
     bytes(string).zip(bytes(key)).map do |c, k|
-      (BASE + block.(c, k)).chr
+      (BASE + block.(c, k) % 26).chr
     end.join
   end
 
