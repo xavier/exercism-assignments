@@ -29,11 +29,15 @@ class Luhn
 
   def multiply_digit(position, digit)
     if position.even?
-      times2 = digit * 2
-      times2 > 9 ? (times2 - 9) : times2
+      double_digit(digit)
     else
       digit
     end
+  end
+
+  def double_digit(digit)
+    times2 = digit * 2
+    times2 > 9 ? (times2 - 9) : times2
   end
 
   def enumerate_digits(number)
