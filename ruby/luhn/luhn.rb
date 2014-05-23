@@ -27,8 +27,8 @@ class Luhn
 
   def multiply_digit(position, digit)
     if position.even?
-      times2 = digit*2
-      times2 > 9 ? times2-9 : times2
+      times2 = digit * 2
+      times2 > 9 ? (times2 - 9) : times2
     else
       digit
     end
