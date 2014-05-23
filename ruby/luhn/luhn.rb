@@ -3,11 +3,13 @@ require 'minitest/autorun'
 class Luhn
 
   def initialize(number)
-    @digits = number.to_s.scan(/\d/).map(&:to_i)
+    @number = number
   end
 
   def addends
-    @digits.each_with_index.map { |d, i| multiply_digit(@digits.size-i, d)  }
+    enumerate_digits(@number).map do |position, digit|
+      multiply_digit(position, digit)
+    end
   end
 
   def checksum
@@ -32,6 +34,15 @@ class Luhn
     else
       digit
     end
+  end
+
+  def enumerate_digits(number)
+    digits = []
+    while number != 0 do
+      digits.unshift [digits.size.succ, (number % 10)]
+      number /= 10
+    end
+    digits
   end
 
 end
