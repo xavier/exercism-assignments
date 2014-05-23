@@ -6,9 +6,9 @@ class Cipher
 
   def initialize(key = nil)
     if key
-      raise ArgumentError unless key =~ /[a-z]+/
+      ensure_key_is_valid!(key)
     else
-      @key ||= (BASE + Random.rand(26)).chr * 100
+      @key = generate_random_key
     end
   end
 
@@ -21,6 +21,14 @@ class Cipher
   end
 
   private
+
+  def ensure_key_is_valid!(key)
+    raise ArgumentError unless key =~ /[a-z]+/
+  end
+
+  def generate_random_key
+    (BASE + Random.rand(26)).chr * 100
+  end
 
 
   def bytes(string)
