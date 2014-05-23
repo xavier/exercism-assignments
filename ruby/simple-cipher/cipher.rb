@@ -30,7 +30,11 @@ class Cipher
   end
 
   def generate_random_key
-    (1..RANDOM_KEY_LENGTH).map { (BASE + Random.rand(ALPHABET_SIZE)).chr }.join
+    (1..RANDOM_KEY_LENGTH).map { random_char }.join
+  end
+
+  def random_char
+    (BASE + Random.rand(ALPHABET_SIZE)).chr
   end
 
 
