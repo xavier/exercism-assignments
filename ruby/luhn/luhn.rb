@@ -27,6 +27,15 @@ class Luhn
 
   private
 
+  def enumerate_digits(number)
+    digits = []
+    while number != 0 do
+      digits.unshift [digits.size.succ, (number % 10)]
+      number /= 10
+    end
+    digits
+  end
+
   def multiply_digit(position, digit)
     if position.even?
       double_digit(digit)
@@ -38,15 +47,6 @@ class Luhn
   def double_digit(digit)
     times2 = digit * 2
     times2 > 9 ? (times2 - 9) : times2
-  end
-
-  def enumerate_digits(number)
-    digits = []
-    while number != 0 do
-      digits.unshift [digits.size.succ, (number % 10)]
-      number /= 10
-    end
-    digits
   end
 
 end
