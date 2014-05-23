@@ -29,25 +29,25 @@ class RandomKeyCipherTest < MiniTest::Unit::TestCase
   end
 end
 
-# class IncorrectKeyCipherTest < MiniTest::Unit::TestCase
-#   def test_cipher_with_caps_key
-#     assert_raises ArgumentError do
-#       Cipher.new("ABCDEF")
-#     end
-#   end
+class IncorrectKeyCipherTest < MiniTest::Unit::TestCase
+  def test_cipher_with_caps_key
+    assert_raises ArgumentError do
+      Cipher.new("ABCDEF")
+    end
+  end
 
-#   def test_cipher_with_numeric_key
-#     assert_raises ArgumentError do
-#       Cipher.new("12345")
-#     end
-#   end
+  def test_cipher_with_numeric_key
+    assert_raises ArgumentError do
+      Cipher.new("12345")
+    end
+  end
 
-#   def test_cipher_with_empty_key
-#     assert_raises ArgumentError do
-#       Cipher.new("")
-#     end
-#   end
-# end
+  def test_cipher_with_empty_key
+    assert_raises ArgumentError do
+      Cipher.new("")
+    end
+  end
+end
 
 # class SubstitutionCipherTest < MiniTest::Unit::TestCase
 #   def setup

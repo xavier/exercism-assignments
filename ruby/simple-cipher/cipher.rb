@@ -5,7 +5,11 @@ class Cipher
   attr_reader :key
 
   def initialize(key = nil)
-    @key ||= (BASE + Random.rand(26)).chr * 100
+    if key
+      raise ArgumentError unless key =~ /[a-z]+/
+    else
+      @key ||= (BASE + Random.rand(26)).chr * 100
+    end
   end
 
   def encode(plain_text)
