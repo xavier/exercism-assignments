@@ -22,11 +22,16 @@ defmodule Phone do
   @spec number(String.t) :: String.t
   def number(raw) do
     raw
-    |> String.replace(~r/[^\d]/, "")
-    |> String.replace(~r/^1(\d{10})/, "\\1")
-    |> String.replace(~r/^\d{11,}$/, @bad_number)
-    |> String.replace(~r/^\d{0,9}$/, @bad_number)
+    |> _number_strip_non_digits
+    |> _number_strip_leading_1
+    |> _number_cannot_be_too_short
+    |> _number_cannot_be_too_long
   end
+
+  defp _number_strip_non_digits(string),    do: String.replace(string, ~r/[^\d]/, "")
+  defp _number_strip_leading_1(string),     do: String.replace(string, ~r/^1(\d{10})/, "\\1")
+  defp _number_cannot_be_too_short(string), do: String.replace(string, ~r/^\d{11,}$/, @bad_number)
+  defp _number_cannot_be_too_long(string),  do: String.replace(string, ~r/^\d{0,9}$/, @bad_number)
 
   @doc """
   Extract the area code from a phone number
