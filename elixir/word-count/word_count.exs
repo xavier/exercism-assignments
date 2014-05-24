@@ -13,11 +13,13 @@ defmodule Words do
   end
 
   defp normalize(sentence) do
-    String.downcase(sentence)
+    sentence
+    |> String.downcase
+    |> String.replace("_", " ")
   end
 
-  defp words(sentence) do
-    List.flatten Regex.scan(~r/[\w-]+/, sentence)
+  defp words(normalized_sentence) do
+    List.flatten Regex.scan(~r/[\w-]+/, normalized_sentence)
   end
 
   defp count_occurences(list) do
