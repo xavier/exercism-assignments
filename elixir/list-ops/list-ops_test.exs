@@ -101,21 +101,21 @@ defmodule ListOpsTest do
       Enum.to_list(1..2_000_000)
   end
 
-  # test "concat of empty list of lists" do
-  #   assert L.concat([]) == []
-  # end
+  test "concat of empty list of lists" do
+    assert L.concat([]) == []
+  end
 
-  # test "concat of normal list of lists" do
-  #   assert L.concat([[1,2],[3],[],[4,5,6]]) == [1,2,3,4,5,6]
-  # end
+  test "concat of normal list of lists" do
+    assert L.concat([[1,2],[3],[],[4,5,6]]) == [1,2,3,4,5,6]
+  end
 
-  # test "concat of huge list of small lists" do
-  #   assert L.concat(Enum.map(1..1_000_000, &[&1])) ==
-  #     Enum.to_list(1..1_000_000)
-  # end
+  test "concat of huge list of small lists" do
+    assert L.concat(Enum.map(1..1_000_000, &[&1])) ==
+      Enum.to_list(1..1_000_000)
+  end
 
-  # test "concat of small list of huge lists" do
-  #   assert L.concat(Enum.map(0..9, &Enum.to_list((&1*100_000+1)..((&1+1)*100_000)))) ==
-  #     Enum.to_list(1..1_000_000)
-  # end
+  test "concat of small list of huge lists" do
+    assert L.concat(Enum.map(0..9, &Enum.to_list((&1*100_000+1)..((&1+1)*100_000)))) ==
+      Enum.to_list(1..1_000_000)
+  end
 end

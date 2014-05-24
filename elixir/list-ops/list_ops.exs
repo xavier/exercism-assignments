@@ -41,7 +41,8 @@ defmodule ListOps do
   def append([head|tail], b), do: [head|append(tail, b)]
 
   @spec concat([[any]]) :: [any]
-  def concat(ll) do
+  def concat([]), do: []
+  def concat([[]|tail]), do: concat(tail)
+  def concat([[sublist_head|sublist_tail]|tail]), do: [sublist_head|concat([sublist_tail|tail])]
 
-  end
 end
