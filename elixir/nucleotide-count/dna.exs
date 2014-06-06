@@ -14,7 +14,7 @@ defmodule DNA do
   """
   @spec count([char], char) :: non_neg_integer
   def count(strand, nucleotide) do
-    strand |> Enum.count fn (n) -> n == nucleotide end
+    Enum.count strand, fn (n) -> n == nucleotide end
   end
 
 
@@ -28,7 +28,7 @@ defmodule DNA do
   """
   @spec nucleotide_counts([char]) :: HashDict.t
   def nucleotide_counts(strand) do
-    strand |> Enum.reduce(_nucleotide_counters, &_count_nucleotide/2)
+    Enum.reduce strand, _nucleotide_counters, &_count_nucleotide/2
   end
 
   defp _count_nucleotide(nucleotide, counters) do
