@@ -16,7 +16,7 @@ defmodule Sublist do
   defp sublist?([], _), do: true
   defp sublist?(_, []), do: false
   defp sublist?(a = [head_of_a|tail_of_a], [head_of_b|tail_of_b]) when head_of_a === head_of_b do
-    if tail_of_a === Enum.take(tail_of_b, Enum.count(a)-1) do
+    if tail_of_a === Enum.take(tail_of_b, Enum.count(tail_of_a)) do
       true
     else
       sublist?(a, tail_of_b)
