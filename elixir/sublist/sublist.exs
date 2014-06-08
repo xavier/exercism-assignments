@@ -6,10 +6,10 @@ defmodule Sublist do
 
   def compare(a, b) do
     cond do
-      a === b           -> :equal
+      a === b          -> :equal
       sublist?(a, b)   -> :sublist
       superlist?(a, b) -> :superlist
-      true              -> :unequal
+      true             -> :unequal
     end
   end
 
