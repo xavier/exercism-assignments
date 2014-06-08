@@ -36,6 +36,6 @@ defmodule DNA do
   end
 
   defp nucleotide_counters do
-    @nucleotides |> Enum.map(&({&1, 0})) |> Enum.into HashDict.new
+    Enum.into @nucleotides, HashDict.new, &({&1, 0})
   end
 end
