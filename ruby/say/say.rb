@@ -55,8 +55,8 @@ class Say
   private
 
   def number_to_words(number)
-    return number_to_words_up_to_20(number)   if number < 20
-    return number_to_words_up_to_100(number)  if number < 100
+    return number_to_words_up_to_20(number)  if number < 20
+    return number_to_words_up_to_100(number) if number < 100
     number_to_words_general_case(number)
   end
 
