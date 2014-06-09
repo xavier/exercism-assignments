@@ -65,23 +65,25 @@ class Say
   end
 
   def number_to_words_up_to_100(number)
-    words = []
-    ENGLISH_NUMBERS_UP_TO_100.each do |value, word|
-      occurences, number = number.divmod(value)
-      words << word if occurences > 0
+    decompose_number_into_words(number, ENGLISH_NUMBERS_UP_TO_100, "-") do |occurences, word|
+      word
     end
-    words << number_to_words_up_to_20(number) if number > 0
-    words.join("-")
   end
 
   def number_to_words_general_case(number)
+    decompose_number_into_words(number, LARGE_ENGLISH_NUMBERS, " ") do |occurences, word|
+      number_to_words(occurences) + " " + word
+    end
+  end
+
+  def decompose_number_into_words(number, reference_numbers, glue, &word_builder)
     words = []
-    LARGE_ENGLISH_NUMBERS.each do |value, word|
+    reference_numbers.each do |value, word|
       occurences, number = number.divmod(value)
-      words << number_to_words(occurences) + " " + word if occurences > 0
+      words << word_builder.(occurences, word) if occurences > 0
     end
     words << number_to_words(number) if number > 0
-    words.join(" ")
+    words.join(glue)
   end
 
 end
