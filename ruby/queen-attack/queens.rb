@@ -1,9 +1,11 @@
 
 class ChessBoard
 
+  SIZE = 8
+
   def render
-    (0..7).map do |row|
-      (0..7).map do |col|
+    (0...SIZE).map do |row|
+      (0...SIZE).map do |col|
         yield row, col
       end.join(" ")
     end.join("\n")
