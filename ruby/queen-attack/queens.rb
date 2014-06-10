@@ -1,4 +1,16 @@
 
+class ChessBoard
+
+  def render
+    (0..7).map do |row|
+      (0..7).map do |col|
+        yield row, col
+      end.join(" ")
+    end.join("\n")
+  end
+
+end
+
 class Queens
 
   DEFAULT_POSITIONS = {
@@ -20,7 +32,7 @@ class Queens
   end
 
   def to_s
-    render_board do |row, col|
+    ChessBoard.new.render do |row, col|
       render_board_item(row, col)
     end
   end
@@ -43,14 +55,6 @@ class Queens
     dy = (@white[0] - @black[0]).abs
     dx = (@white[1] - @black[1]).abs
     dx == dy
-  end
-
-  def render_board
-    (0..7).map do |row|
-      (0..7).map do |col|
-        yield row, col
-      end.join(" ")
-    end.join("\n")
   end
 
   BOARD_ITEM_WHITE = "W"
