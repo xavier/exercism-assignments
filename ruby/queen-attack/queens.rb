@@ -12,7 +12,7 @@ class Queens
     start_positions = DEFAULT_POSITIONS.merge(positions)
     @white = start_positions[:white]
     @black = start_positions[:black]
-    raise ArgumentError, "cannot occupy same space" if @white == @black
+    raise ArgumentError, "cannot occupy same space" if same_space?
   end
 
   def attack?
@@ -26,6 +26,10 @@ class Queens
   end
 
   private
+
+  def same_space?
+    same_row? && same_column?
+  end
 
   def same_row?
     @white[0] == @black[0]
