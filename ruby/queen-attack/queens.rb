@@ -1,14 +1,16 @@
 
 class ChessBoard
 
-  SIZE = 8
+  SIZE             = 8
+  COLUMN_SEPARATOR = " "
+  ROW_SEPARATOR    = "\n"
 
   def render
     (0...SIZE).map do |row|
       (0...SIZE).map do |col|
         yield row, col
-      end.join(" ")
-    end.join("\n")
+      end.join(COLUMN_SEPARATOR)
+    end.join(ROW_SEPARATOR)
   end
 
 end
