@@ -28,7 +28,7 @@ class Bst
       branch.insert(new_data)
       branch
     else
-      Bst.new(new_data)
+      self.class.new(new_data)
     end
   end
 
