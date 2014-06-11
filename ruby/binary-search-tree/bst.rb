@@ -9,9 +9,9 @@ class Bst
 
   def insert(new_data)
     if new_data <= @data
-      @left  = insert_branch(@left, new_data)
+      insert_subtree(:left, new_data)
     else
-      @right = insert_branch(@right, new_data)
+      insert_subtree(:right, new_data)
     end
   end
 
@@ -23,13 +23,21 @@ class Bst
 
   private
 
-  def insert_branch(branch, new_data)
-    if branch
-      branch.insert(new_data)
-      branch
+  def insert_subtree(branch_name, new_data)
+    subtree = branch(branch_name)
+    if subtree
+      subtree.insert(new_data)
     else
-      self.class.new(new_data)
+      set_branch(branch_name, self.class.new(new_data))
     end
+  end
+
+  def branch(branch_name)
+    self.send(branch_name)
+  end
+
+  def set_branch(branch_name, subtree)
+    instance_variable_set("@#{branch_name}", subtree)
   end
 
 end
