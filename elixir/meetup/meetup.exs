@@ -33,10 +33,14 @@ defmodule Meetup do
     from_weekday   = weekday_number(weekday)
     to_weekday     = date_weekday_number(date)
     offset_in_days = weekdays_between(from_weekday, to_weekday)
-    date
-    |> date_to_epoch
-    |> advance_epoch_by_days(offset_in_days)
-    |> epoch_to_date
+    if offset_in_days == 0 do
+      date
+    else
+      date
+      |> date_to_epoch
+      |> advance_epoch_by_days(offset_in_days)
+      |> epoch_to_date
+    end
   end
 
   @day_seconds 24 * 60 * 60
