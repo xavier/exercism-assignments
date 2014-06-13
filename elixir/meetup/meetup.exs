@@ -24,30 +24,36 @@ defmodule Meetup do
     {year, month, 0}
   end
 
-  @day_seconds 24 * 60 * 60
-
   def advance_to_first(date, weekday) do
     from_weekday   = weekday_number(weekday)
     to_weekday     = date_weekday_number(date)
     offset_in_days = weekdays_between(from_weekday, to_weekday)
-    epoch_to_date(date_to_epoch(date) + offset_in_days * @day_seconds)
+    date
+    |> date_to_epoch
+    |> advance_epoch_by_days(offset_in_days)
+    |> epoch_to_date
   end
 
+  @day_seconds 24 * 60 * 60
 
-  def date_to_epoch(date) do
+  defp advance_epoch_by_days(epoch, days) do
+    epoch + days * @day_seconds
+  end
+
+  defp date_to_epoch(date) do
     :calendar.datetime_to_gregorian_seconds({date, {0, 0, 0}})
   end
 
-  def epoch_to_date(epoch) do
+  defp epoch_to_date(epoch) do
     {date, _} = :calendar.gregorian_seconds_to_datetime(epoch)
     date
   end
 
-  def weekdays_between(from_weekday, to_weekday) do
+  defp weekdays_between(from_weekday, to_weekday) do
     rem(7 - (to_weekday - from_weekday), 7)
   end
 
-  def date_weekday_number(date) do
+  defp date_weekday_number(date) do
     :calendar.day_of_the_week(date)
   end
 
