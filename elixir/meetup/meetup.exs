@@ -29,7 +29,7 @@ defmodule Meetup do
     {year, month, 0}
   end
 
-  def advance_to_first(date, weekday) do
+  defp advance_to_first(date, weekday) do
     from_weekday   = weekday_number(weekday)
     to_weekday     = date_weekday_number(date)
     offset_in_days = weekdays_between(from_weekday, to_weekday)
