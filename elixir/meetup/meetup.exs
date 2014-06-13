@@ -21,6 +21,10 @@ defmodule Meetup do
     advance_to_first({year, month, 1}, weekday)
   end
 
+  def meetup(year, month, weekday, :last) do
+    advance_to_first({year, month, last_day_of_month(year, month) - 6}, weekday)
+  end
+
   def meetup(year, month, weekday, :teenth) do
     advance_to_first({year, month, 13}, weekday)
   end
@@ -60,6 +64,10 @@ defmodule Meetup do
 
   defp weekdays_between(from_weekday, to_weekday) do
     rem(7 - (to_weekday - from_weekday), 7)
+  end
+
+  defp last_day_of_month(year, month) do
+    :calendar.last_day_of_the_month(year, month)
   end
 
   defp date_weekday_number(date) do
