@@ -16,8 +16,13 @@ defmodule Meetup do
   fall.
   """
   @spec meetup(pos_integer, pos_integer, weekday, schedule) :: :calendar.date
+
   def meetup(year, month, weekday, :first) do
     advance_to_first({year, month, 1}, weekday)
+  end
+
+  def meetup(year, month, weekday, :teenth) do
+    advance_to_first({year, month, 13}, weekday)
   end
 
   def meetup(year, month, weekday, schedule) do
