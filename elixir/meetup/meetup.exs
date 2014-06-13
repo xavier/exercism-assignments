@@ -41,10 +41,6 @@ defmodule Meetup do
     advance_to_first({year, month, 13}, weekday)
   end
 
-  def meetup(year, month, weekday, schedule) do
-    {year, month, 0}
-  end
-
   defp advance_date_by_weeks({year, month, day}, weeks) do
     {year, month, day + weeks * 7}
   end
