@@ -150,173 +150,173 @@ defmodule MeetupTest do
     assert Meetup.meetup(2013, 4, :sunday, :first) == {2013, 4, 7}
   end
 
-  # test "second monday of march 2013" do
-  #   assert Meetup.meetup(2013, 3, :monday, :second) == {2013, 3, 11}
-  # end
+  test "second monday of march 2013" do
+    assert Meetup.meetup(2013, 3, :monday, :second) == {2013, 3, 11}
+  end
 
-  # test "second monday of april 2013" do
-  #   assert Meetup.meetup(2013, 4, :monday, :second) == {2013, 4, 8}
-  # end
+  test "second monday of april 2013" do
+    assert Meetup.meetup(2013, 4, :monday, :second) == {2013, 4, 8}
+  end
 
-  # test "second tuesday of may 2013" do
-  #   assert Meetup.meetup(2013, 5, :tuesday, :second) == {2013, 5, 14}
-  # end
+  test "second tuesday of may 2013" do
+    assert Meetup.meetup(2013, 5, :tuesday, :second) == {2013, 5, 14}
+  end
 
-  # test "second tuesday of june 2013" do
-  #   assert Meetup.meetup(2013, 6, :tuesday, :second) == {2013, 6, 11}
-  # end
+  test "second tuesday of june 2013" do
+    assert Meetup.meetup(2013, 6, :tuesday, :second) == {2013, 6, 11}
+  end
 
-  # test "second wednesday of july 2013" do
-  #   assert Meetup.meetup(2013, 7, :wednesday, :second) == {2013, 7, 10}
-  # end
+  test "second wednesday of july 2013" do
+    assert Meetup.meetup(2013, 7, :wednesday, :second) == {2013, 7, 10}
+  end
 
-  # test "second wednesday of august 2013" do
-  #   assert Meetup.meetup(2013, 8, :wednesday, :second) == {2013, 8, 14}
-  # end
+  test "second wednesday of august 2013" do
+    assert Meetup.meetup(2013, 8, :wednesday, :second) == {2013, 8, 14}
+  end
 
-  # test "second thursday of september 2013" do
-  #   assert Meetup.meetup(2013, 9, :thursday, :second) == {2013, 9, 12}
-  # end
+  test "second thursday of september 2013" do
+    assert Meetup.meetup(2013, 9, :thursday, :second) == {2013, 9, 12}
+  end
 
-  # test "second thursday of october 2013" do
-  #   assert Meetup.meetup(2013, 10, :thursday, :second) == {2013, 10, 10}
-  # end
+  test "second thursday of october 2013" do
+    assert Meetup.meetup(2013, 10, :thursday, :second) == {2013, 10, 10}
+  end
 
-  # test "second friday of november 2013" do
-  #   assert Meetup.meetup(2013, 11, :friday, :second) == {2013, 11, 8}
-  # end
+  test "second friday of november 2013" do
+    assert Meetup.meetup(2013, 11, :friday, :second) == {2013, 11, 8}
+  end
 
-  # test "second friday of december 2013" do
-  #   assert Meetup.meetup(2013, 12, :friday, :second) == {2013, 12, 13}
-  # end
+  test "second friday of december 2013" do
+    assert Meetup.meetup(2013, 12, :friday, :second) == {2013, 12, 13}
+  end
 
-  # test "second saturday of january 2013" do
-  #   assert Meetup.meetup(2013, 1, :saturday, :second) == {2013, 1, 12}
-  # end
+  test "second saturday of january 2013" do
+    assert Meetup.meetup(2013, 1, :saturday, :second) == {2013, 1, 12}
+  end
 
-  # test "second saturday of february 2013" do
-  #   assert Meetup.meetup(2013, 2, :saturday, :second) == {2013, 2, 9}
-  # end
+  test "second saturday of february 2013" do
+    assert Meetup.meetup(2013, 2, :saturday, :second) == {2013, 2, 9}
+  end
 
-  # test "second sunday of march 2013" do
-  #   assert Meetup.meetup(2013, 3, :sunday, :second) == {2013, 3, 10}
-  # end
+  test "second sunday of march 2013" do
+    assert Meetup.meetup(2013, 3, :sunday, :second) == {2013, 3, 10}
+  end
 
-  # test "second sunday of april 2013" do
-  #   assert Meetup.meetup(2013, 4, :sunday, :second) == {2013, 4, 14}
-  # end
+  test "second sunday of april 2013" do
+    assert Meetup.meetup(2013, 4, :sunday, :second) == {2013, 4, 14}
+  end
 
-  # test "third monday of march 2013" do
-  #   assert Meetup.meetup(2013, 3, :monday, :third) == {2013, 3, 18}
-  # end
+  test "third monday of march 2013" do
+    assert Meetup.meetup(2013, 3, :monday, :third) == {2013, 3, 18}
+  end
 
-  # test "third monday of april 2013" do
-  #   assert Meetup.meetup(2013, 4, :monday, :third) == {2013, 4, 15}
-  # end
+  test "third monday of april 2013" do
+    assert Meetup.meetup(2013, 4, :monday, :third) == {2013, 4, 15}
+  end
 
-  # test "third tuesday of may 2013" do
-  #   assert Meetup.meetup(2013, 5, :tuesday, :third) == {2013, 5, 21}
-  # end
+  test "third tuesday of may 2013" do
+    assert Meetup.meetup(2013, 5, :tuesday, :third) == {2013, 5, 21}
+  end
 
-  # test "third tuesday of june 2013" do
-  #   assert Meetup.meetup(2013, 6, :tuesday, :third) == {2013, 6, 18}
-  # end
+  test "third tuesday of june 2013" do
+    assert Meetup.meetup(2013, 6, :tuesday, :third) == {2013, 6, 18}
+  end
 
-  # test "third wednesday of july 2013" do
-  #   assert Meetup.meetup(2013, 7, :wednesday, :third) == {2013, 7, 17}
-  # end
+  test "third wednesday of july 2013" do
+    assert Meetup.meetup(2013, 7, :wednesday, :third) == {2013, 7, 17}
+  end
 
-  # test "third wednesday of august 2013" do
-  #   assert Meetup.meetup(2013, 8, :wednesday, :third) == {2013, 8, 21}
-  # end
+  test "third wednesday of august 2013" do
+    assert Meetup.meetup(2013, 8, :wednesday, :third) == {2013, 8, 21}
+  end
 
-  # test "third thursday of september 2013" do
-  #   assert Meetup.meetup(2013, 9, :thursday, :third) == {2013, 9, 19}
-  # end
+  test "third thursday of september 2013" do
+    assert Meetup.meetup(2013, 9, :thursday, :third) == {2013, 9, 19}
+  end
 
-  # test "third thursday of october 2013" do
-  #   assert Meetup.meetup(2013, 10, :thursday, :third) == {2013, 10, 17}
-  # end
+  test "third thursday of october 2013" do
+    assert Meetup.meetup(2013, 10, :thursday, :third) == {2013, 10, 17}
+  end
 
-  # test "third friday of november 2013" do
-  #   assert Meetup.meetup(2013, 11, :friday, :third) == {2013, 11, 15}
-  # end
+  test "third friday of november 2013" do
+    assert Meetup.meetup(2013, 11, :friday, :third) == {2013, 11, 15}
+  end
 
-  # test "third friday of december 2013" do
-  #   assert Meetup.meetup(2013, 12, :friday, :third) == {2013, 12, 20}
-  # end
+  test "third friday of december 2013" do
+    assert Meetup.meetup(2013, 12, :friday, :third) == {2013, 12, 20}
+  end
 
-  # test "third saturday of january 2013" do
-  #   assert Meetup.meetup(2013, 1, :saturday, :third) == {2013, 1, 19}
-  # end
+  test "third saturday of january 2013" do
+    assert Meetup.meetup(2013, 1, :saturday, :third) == {2013, 1, 19}
+  end
 
-  # test "third saturday of february 2013" do
-  #   assert Meetup.meetup(2013, 2, :saturday, :third) == {2013, 2, 16}
-  # end
+  test "third saturday of february 2013" do
+    assert Meetup.meetup(2013, 2, :saturday, :third) == {2013, 2, 16}
+  end
 
-  # test "third sunday of march 2013" do
-  #   assert Meetup.meetup(2013, 3, :sunday, :third) == {2013, 3, 17}
-  # end
+  test "third sunday of march 2013" do
+    assert Meetup.meetup(2013, 3, :sunday, :third) == {2013, 3, 17}
+  end
 
-  # test "third sunday of april 2013" do
-  #   assert Meetup.meetup(2013, 4, :sunday, :third) == {2013, 4, 21}
-  # end
+  test "third sunday of april 2013" do
+    assert Meetup.meetup(2013, 4, :sunday, :third) == {2013, 4, 21}
+  end
 
-  # test "fourth monday of march 2013" do
-  #   assert Meetup.meetup(2013, 3, :monday, :fourth) == {2013, 3, 25}
-  # end
+  test "fourth monday of march 2013" do
+    assert Meetup.meetup(2013, 3, :monday, :fourth) == {2013, 3, 25}
+  end
 
-  # test "fourth monday of april 2013" do
-  #   assert Meetup.meetup(2013, 4, :monday, :fourth) == {2013, 4, 22}
-  # end
+  test "fourth monday of april 2013" do
+    assert Meetup.meetup(2013, 4, :monday, :fourth) == {2013, 4, 22}
+  end
 
-  # test "fourth tuesday of may 2013" do
-  #   assert Meetup.meetup(2013, 5, :tuesday, :fourth) == {2013, 5, 28}
-  # end
+  test "fourth tuesday of may 2013" do
+    assert Meetup.meetup(2013, 5, :tuesday, :fourth) == {2013, 5, 28}
+  end
 
-  # test "fourth tuesday of june 2013" do
-  #   assert Meetup.meetup(2013, 6, :tuesday, :fourth) == {2013, 6, 25}
-  # end
+  test "fourth tuesday of june 2013" do
+    assert Meetup.meetup(2013, 6, :tuesday, :fourth) == {2013, 6, 25}
+  end
 
-  # test "fourth wednesday of july 2013" do
-  #   assert Meetup.meetup(2013, 7, :wednesday, :fourth) == {2013, 7, 24}
-  # end
+  test "fourth wednesday of july 2013" do
+    assert Meetup.meetup(2013, 7, :wednesday, :fourth) == {2013, 7, 24}
+  end
 
-  # test "fourth wednesday of august 2013" do
-  #   assert Meetup.meetup(2013, 8, :wednesday, :fourth) == {2013, 8, 28}
-  # end
+  test "fourth wednesday of august 2013" do
+    assert Meetup.meetup(2013, 8, :wednesday, :fourth) == {2013, 8, 28}
+  end
 
-  # test "fourth thursday of september 2013" do
-  #   assert Meetup.meetup(2013, 9, :thursday, :fourth) == {2013, 9, 26}
-  # end
+  test "fourth thursday of september 2013" do
+    assert Meetup.meetup(2013, 9, :thursday, :fourth) == {2013, 9, 26}
+  end
 
-  # test "fourth thursday of october 2013" do
-  #   assert Meetup.meetup(2013, 10, :thursday, :fourth) == {2013, 10, 24}
-  # end
+  test "fourth thursday of october 2013" do
+    assert Meetup.meetup(2013, 10, :thursday, :fourth) == {2013, 10, 24}
+  end
 
-  # test "fourth friday of november 2013" do
-  #   assert Meetup.meetup(2013, 11, :friday, :fourth) == {2013, 11, 22}
-  # end
+  test "fourth friday of november 2013" do
+    assert Meetup.meetup(2013, 11, :friday, :fourth) == {2013, 11, 22}
+  end
 
-  # test "fourth friday of december 2013" do
-  #   assert Meetup.meetup(2013, 12, :friday, :fourth) == {2013, 12, 27}
-  # end
+  test "fourth friday of december 2013" do
+    assert Meetup.meetup(2013, 12, :friday, :fourth) == {2013, 12, 27}
+  end
 
-  # test "fourth saturday of january 2013" do
-  #   assert Meetup.meetup(2013, 1, :saturday, :fourth) == {2013, 1, 26}
-  # end
+  test "fourth saturday of january 2013" do
+    assert Meetup.meetup(2013, 1, :saturday, :fourth) == {2013, 1, 26}
+  end
 
-  # test "fourth saturday of february 2013" do
-  #   assert Meetup.meetup(2013, 2, :saturday, :fourth) == {2013, 2, 23}
-  # end
+  test "fourth saturday of february 2013" do
+    assert Meetup.meetup(2013, 2, :saturday, :fourth) == {2013, 2, 23}
+  end
 
-  # test "fourth sunday of march 2013" do
-  #   assert Meetup.meetup(2013, 3, :sunday, :fourth) == {2013, 3, 24}
-  # end
+  test "fourth sunday of march 2013" do
+    assert Meetup.meetup(2013, 3, :sunday, :fourth) == {2013, 3, 24}
+  end
 
-  # test "fourth sunday of april 2013" do
-  #   assert Meetup.meetup(2013, 4, :sunday, :fourth) == {2013, 4, 28}
-  # end
+  test "fourth sunday of april 2013" do
+    assert Meetup.meetup(2013, 4, :sunday, :fourth) == {2013, 4, 28}
+  end
 
   test "last monday of march 2013" do
     assert Meetup.meetup(2013, 3, :monday, :last) == {2013, 3, 25}

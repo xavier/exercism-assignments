@@ -21,6 +21,18 @@ defmodule Meetup do
     advance_to_first({year, month, 1}, weekday)
   end
 
+  def meetup(year, month, weekday, :second) do
+    advance_to_first({year, month, 1}, weekday) |> advance_date_by_weeks(1)
+  end
+
+  def meetup(year, month, weekday, :third) do
+    advance_to_first({year, month, 1}, weekday) |> advance_date_by_weeks(2)
+  end
+
+  def meetup(year, month, weekday, :fourth) do
+    advance_to_first({year, month, 1}, weekday) |> advance_date_by_weeks(3)
+  end
+
   def meetup(year, month, weekday, :last) do
     advance_to_first({year, month, last_day_of_month(year, month) - 6}, weekday)
   end
@@ -31,6 +43,10 @@ defmodule Meetup do
 
   def meetup(year, month, weekday, schedule) do
     {year, month, 0}
+  end
+
+  defp advance_date_by_weeks({year, month, day}, weeks) do
+    {year, month, day + weeks * 7}
   end
 
   defp advance_to_first(date, weekday) do
