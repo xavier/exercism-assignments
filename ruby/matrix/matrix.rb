@@ -13,8 +13,26 @@ class Matrix
 
   end
 
+  class Parser
+
+    ROW_SEPARATOR = "\n"
+
+    def parse(string)
+      string.
+        split(ROW_SEPARATOR).
+        map { |row| parse_row(row) }
+    end
+
+    private
+
+    def parse_row(row)
+      row.scan(/\d+/).map(&:to_i)
+    end
+
+  end
+
   def initialize(string)
-    @rows = parse(string)
+    @rows = Parser.new.parse(string)
   end
 
   def rows
@@ -25,20 +43,6 @@ class Matrix
     @column_accessor ||= Accessor.new do |index|
       (0...@rows.size).map { |row| @rows[row][index] }
     end
-  end
-
-  private
-
-  ROW_SEPARATOR = "\n"
-
-  def parse(string)
-    string.
-      split(ROW_SEPARATOR).
-      map { |row| parse_row(row) }
-  end
-
-  def parse_row(string)
-    string.scan(/\d+/).map(&:to_i)
   end
 
 end
