@@ -5,9 +5,8 @@ end
 class Triangle
 
   def initialize(a, b, c)
-    @a = ensure_side_is_valid(a, b, c)
-    @b = ensure_side_is_valid(b, a, c)
-    @c = ensure_side_is_valid(c, a, b)
+    @a, @b, @c = a, b, c
+    ensure_valid_sides!
   end
 
   def kind
@@ -35,12 +34,23 @@ class Triangle
     @a == @c
   end
 
-  def ensure_side_is_valid(side, other_side1, other_side2)
-    if side > 0 && side < (other_side1+other_side2)
-      side
-    else
-      raise TriangleError
-    end
+  def ensure_valid_sides!
+    invalid_side!(:a) unless @a > 0
+    invalid_side!(:b) unless @b > 0
+    invalid_side!(:c) unless @c > 0
+    invalid_sides!    unless meets_inequality_constraint?
+  end
+
+  def invalid_side!(side)
+    raise TriangleError, "Side #{side} must be > 0"
+  end
+
+  def invalid_sides!
+    raise TriangleError, "Fails to meet inequality constraint"
+  end
+
+  def meets_inequality_constraint?
+    ((@a-@b).abs < @c) && (@c < (@a+@b))
   end
 
 end
