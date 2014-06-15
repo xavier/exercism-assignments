@@ -15,10 +15,10 @@ class WordProblem
 
   class StateTransition
 
-    attr_reader :on_token
+    attr_reader :expected_token
 
-    def initialize(on_token)
-      @on_token = on_token
+    def initialize(expected_token)
+      @expected_token = expected_token
     end
 
     def update(calculation, token)
@@ -27,7 +27,7 @@ class WordProblem
 
   end
 
-  class FirstNumberState < StateTransition
+  class OnFirstNumber < StateTransition
 
     def initialize
       super(:number)
@@ -39,7 +39,7 @@ class WordProblem
 
   end
 
-  class NumberState < StateTransition
+  class OnNumber < StateTransition
 
     def initialize
       super(:number)
@@ -51,7 +51,7 @@ class WordProblem
 
   end
 
-  class OperationState < StateTransition
+  class OnOperation < StateTransition
 
     OPERATIONS = {
       "plus"          => -> (answer, x) { answer + x },
@@ -78,9 +78,9 @@ class WordProblem
   }
 
   STATE_TRANSITIONS = {
-    :first_number => FirstNumberState.new,
-    :operation    => OperationState.new,
-    :number       => NumberState.new,
+    :first_number => OnFirstNumber.new,
+    :operation    => OnOperation.new,
+    :number       => OnNumber.new,
   }
 
   def initialize(question)
@@ -93,7 +93,7 @@ class WordProblem
     while not scanner.eos?
       scanner.skip(TOKENS[:spaces])
       state_transition = STATE_TRANSITIONS[calculation.state]
-      token = scanner.scan(TOKENS[state_transition.on_token])
+      token = scanner.scan(TOKENS[state_transition.expected_token])
       raise ArgumentError if token.nil?
       calculation = state_transition.update(calculation, token)
     end
