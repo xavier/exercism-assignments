@@ -1,6 +1,16 @@
 
 require 'strscan'
 
+class StrictStringScanner < StringScanner
+
+  def scan!(pattern)
+    token = scan(pattern)
+    raise ArgumentError unless token
+    token
+  end
+
+end
+
 class WordProblem
 
   class CalculationState
@@ -91,8 +101,7 @@ class WordProblem
     calculation = CalculationState.new(:first_number, nil, nil)
     scan_question do |scanner|
       state_transition_for calculation do |transition|
-        token = scanner.scan(TOKENS[transition.expected_token])
-        raise ArgumentError if token.nil?
+        token = scanner.scan!(TOKENS[transition.expected_token])
         calculation = transition.update(calculation, token)
       end
     end
@@ -106,7 +115,7 @@ class WordProblem
   end
 
   def scan_question
-    scanner = StringScanner.new(sanitize(@question))
+    scanner = StrictStringScanner.new(sanitize(@question))
     while not scanner.eos?
       scanner.skip(TOKENS[:spaces])
       yield scanner
