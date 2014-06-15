@@ -109,7 +109,9 @@ class WordProblem
   end
 
   def sanitize(question)
-    question.gsub("What is", "").gsub(/\?$/, "").gsub(/\s+/, " ")
+    question.
+      gsub(/^What is/, "").
+      gsub(/\?$/, "")
   end
 
 end
