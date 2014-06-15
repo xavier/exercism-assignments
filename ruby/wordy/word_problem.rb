@@ -63,19 +63,28 @@ class WordProblem
 
   class OnOperation < StateTransition
 
-    OPERATIONS = {
-      "plus"          => -> (answer, x) { answer + x },
-      "minus"         => -> (answer, x) { answer - x },
-      "multiplied by" => -> (answer, x) { answer * x },
-      "divided by"    => -> (answer, x) { answer / x },
-    }
-
     def initialize
       super(:operation)
     end
 
     def update(calculation, token)
-      CalculationState.new(:number, calculation.answer, OPERATIONS[token])
+      if token =~ /raised to the (\d+)/
+        power = $1.to_i
+        CalculationState.new(:operation, calculation.answer ** power, nil)
+      else
+        CalculationState.new(:number, calculation.answer, operation_for(token))
+      end
+    end
+
+    private
+
+    def operation_for(token)
+      case token
+        when "plus"          then -> (answer, x) { answer + x }
+        when "minus"         then -> (answer, x) { answer - x }
+        when "multiplied by" then -> (answer, x) { answer * x }
+        when "divided by"    then -> (answer, x) { answer / x }
+      end
     end
 
   end
@@ -84,7 +93,7 @@ class WordProblem
     :spaces       => /\s+/,
     :first_number => /-?\d+/,
     :number       => /-?\d+/,
-    :operation    => /plus|minus|multiplied by|divided by/,
+    :operation    => /plus|minus|multiplied by|divided by|raised to the \d+(st|nd|th) power/,
   }
 
   STATE_TRANSITIONS = {

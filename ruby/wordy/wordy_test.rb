@@ -65,6 +65,26 @@ class WordProblemTest < MiniTest::Unit::TestCase
     assert_equal 2, WordProblem.new(question).answer
   end
 
+  def test_raise_to_the_first_power
+    question = 'What is 47 raised to the 1st power?'
+    assert_equal 47, WordProblem.new(question).answer
+  end
+
+  def test_raise_to_the_second_power
+    question = 'What is 9 raised to the 2nd power?'
+    assert_equal 81, WordProblem.new(question).answer
+  end
+
+  def test_raise_to_the_fifth_power
+    question = 'What is -2 raised to the 5th power?'
+    assert_equal -32, WordProblem.new(question).answer
+  end
+
+  def test_raise_to_the_sixteenth_power
+    question = 'What is 2 raised to the 16th power?'
+    assert_equal 65536, WordProblem.new(question).answer
+  end
+
   def test_too_advanced
     assert_raises ArgumentError do
       WordProblem.new('What is 53 cubed?').answer
