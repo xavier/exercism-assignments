@@ -90,15 +90,20 @@ class WordProblem
   def answer
     calculation = CalculationState.new(:first_number, nil, nil)
     scan_question do |scanner|
-      state_transition = STATE_TRANSITIONS[calculation.state]
-      token = scanner.scan(TOKENS[state_transition.expected_token])
-      raise ArgumentError if token.nil?
-      calculation = state_transition.update(calculation, token)
+      state_transition_for calculation do |transition|
+        token = scanner.scan(TOKENS[transition.expected_token])
+        raise ArgumentError if token.nil?
+        calculation = transition.update(calculation, token)
+      end
     end
     calculation.answer
   end
 
   private
+
+  def state_transition_for(calculation)
+    yield STATE_TRANSITIONS[calculation.state]
+  end
 
   def scan_question
     scanner = StringScanner.new(sanitize(@question))
