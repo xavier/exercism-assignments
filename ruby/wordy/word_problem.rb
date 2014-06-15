@@ -69,14 +69,21 @@ class WordProblem
 
     def update(calculation, token)
       if token =~ /raised to the (\d+)/
-        power = $1.to_i
-        CalculationState.new(:operation, calculation.answer ** power, nil)
+        raise_to_nth_power(calculation, $1.to_i)
       else
-        CalculationState.new(:number, calculation.answer, operation_for(token))
+        arithmetic_operation(calculation, token)
       end
     end
 
     private
+
+    def raise_to_nth_power(calculation, n)
+      CalculationState.new(:operation, calculation.answer ** n, nil)
+    end
+
+    def arithmetic_operation(calculation, token)
+      CalculationState.new(:number, calculation.answer, operation_for(token))
+    end
 
     def operation_for(token)
       case token
