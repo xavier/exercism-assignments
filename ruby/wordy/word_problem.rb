@@ -84,14 +84,12 @@ class WordProblem
   }
 
   def initialize(question)
-    @question = sanitize(question)
+    @question = question
   end
 
   def answer
-    scanner = StringScanner.new(@question)
     calculation = CalculationState.new(:first_number, nil, nil)
-    while not scanner.eos?
-      scanner.skip(TOKENS[:spaces])
+    scan_question do |scanner|
       state_transition = STATE_TRANSITIONS[calculation.state]
       token = scanner.scan(TOKENS[state_transition.expected_token])
       raise ArgumentError if token.nil?
@@ -101,6 +99,14 @@ class WordProblem
   end
 
   private
+
+  def scan_question
+    scanner = StringScanner.new(sanitize(@question))
+    while not scanner.eos?
+      scanner.skip(TOKENS[:spaces])
+      yield scanner
+    end
+  end
 
   def sanitize(question)
     question.gsub("What is", "").gsub(/\?$/, "").gsub(/\s+/, " ")
