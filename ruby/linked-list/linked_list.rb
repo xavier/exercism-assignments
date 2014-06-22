@@ -10,8 +10,7 @@ class Deque
   def push(datum)
     new_element = Element.new(datum, @tail, nil)
     @tail.next = new_element if @tail
-    @tail = new_element
-    @head = @tail unless @head
+    new_tail! new_element
   end
 
   def pop
@@ -23,14 +22,25 @@ class Deque
   def unshift(datum)
     new_element = Element.new(datum, nil, @head)
     @head.prev = new_element if @head
-    @head = new_element
-    @tail = @head unless @tail
+    new_head! new_element
   end
 
   def shift
     shifted = @head
     @head = shifted.next
     shifted.datum
+  end
+
+  private
+
+  def new_head!(element)
+    @head = element
+    @tail = @head unless @tail
+  end
+
+  def new_tail!(element)
+    @tail = element
+    @head = @tail unless @head
   end
 
 end
