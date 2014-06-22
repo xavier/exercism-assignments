@@ -33,8 +33,7 @@ class Robot
   end
 
   def initialize
-    @coordinates = Coordinates.new(0, 0)
-    @bearing     = :north
+    at(0, 0).orient(:north)
   end
 
   def orient(new_bearing)
