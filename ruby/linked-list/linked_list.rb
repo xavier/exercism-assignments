@@ -15,7 +15,7 @@ class Deque
 
   def pop
     popped = @tail
-    @tail = popped.prev
+    new_tail! popped.prev
     popped.datum
   end
 
@@ -27,7 +27,7 @@ class Deque
 
   def shift
     shifted = @head
-    @head = shifted.next
+    new_head! shifted.next
     shifted.datum
   end
 
