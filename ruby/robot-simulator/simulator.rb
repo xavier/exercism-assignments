@@ -1,18 +1,25 @@
 
 class Robot
 
-  attr_reader :bearing
+  class Bearing
 
-  BEARINGS = [:north, :east, :south, :west]
-  RIGHT    = +1
-  LEFT     = -1
+    attr_reader :index, :name, :movement
 
-  MOVEMENTS = {
-    :north => [0, 1],
-    :east  => [1, 0],
-    :south => [0, -1],
-    :west  => [-1, 0],
-  }
+    def initialize(index, name, movement)
+      @index, @name, @movement = index, name, movement
+    end
+
+  end
+
+  BEARINGS = [
+    Bearing.new(0, :north, [0, 1]),
+    Bearing.new(1, :east,  [1, 0]),
+    Bearing.new(2, :south, [0, -1]),
+    Bearing.new(3, :west,  [-1, 0]),
+  ]
+
+  RIGHT = +1
+  LEFT  = -1
 
   class Coordinates
 
@@ -37,9 +44,13 @@ class Robot
   end
 
   def orient(new_bearing)
-    raise ArgumentError unless BEARINGS.include?(new_bearing)
-    @bearing = new_bearing
+    @bearing = BEARINGS.detect { |b| b.name == new_bearing }
+    raise ArgumentError unless @bearing
     self
+  end
+
+  def bearing
+    @bearing.name
   end
 
   def turn_right
@@ -62,19 +73,14 @@ class Robot
   end
 
   def advance
-    @coordinates = @coordinates.move(*movement)
+    @coordinates = @coordinates.move(*@bearing.movement)
     self
   end
 
   private
 
-  def movement
-    MOVEMENTS[@bearing]
-  end
-
   def turn(direction)
-    index = BEARINGS.index(@bearing)
-    @bearing = BEARINGS[(index + direction) % BEARINGS.size]
+    @bearing = BEARINGS[(@bearing.index+ direction) % BEARINGS.size]
   end
 
 end
