@@ -1,12 +1,43 @@
 
 class Garden
 
-  PLANTS = {
-    "C" => :clover,
-    "G" => :grass,
-    "R" => :radishes,
-    "V" => :violets
-  }
+  class Diagram
+
+    PLANTS = {
+      "C" => :clover,
+      "G" => :grass,
+      "R" => :radishes,
+      "V" => :violets
+    }
+
+    def initialize(text)
+      @text = text
+    end
+
+    def rows
+      @rows ||= parse_rows
+    end
+
+    def cups_per_row
+      rows.first.length
+    end
+
+    def take_cups(row, index, number_of_cups = 1)
+      offset = index * number_of_cups
+      rows[row][offset, number_of_cups]
+    end
+
+    private
+
+    def parse_rows
+      @text.lines.map { |line| parse_row(line) }
+    end
+
+    def parse_row(line)
+      line.chars.map { |char| PLANTS[char] }
+    end
+
+  end
 
   DEFAULT_STUDENTS = [
     "Alice",
@@ -23,9 +54,12 @@ class Garden
     "Larry"
   ]
 
+  CUPS_PER_STUDENT         = 4
+  ROWS                     = 2
+  CUPS_PER_STUDENT_PER_ROW = CUPS_PER_STUDENT / ROWS
+
   def initialize(cups_diagram, students = DEFAULT_STUDENTS)
-    cups = parse_cups_diagram(cups_diagram)
-    @assigned_cups = assign_cups(cups, students.sort)
+    @assigned_cups = assign_cups(Diagram.new(cups_diagram), students.sort)
   end
 
   def method_missing(student_name, *)
@@ -34,30 +68,27 @@ class Garden
 
   private
 
-  def parse_cups_diagram(diagram)
-    diagram.lines.map { |line| parse_cups_diagram_row(line) }
+  def assign_cups(diagram, students)
+    enumerate_students_with_cups(diagram, students).
+      each_with_object({}) do |(student, index), assigned_cups|
+        assigned_cups[student_method_name(student)] = cups_for_student(diagram, index)
+      end
   end
 
-  def parse_cups_diagram_row(line)
-    line.chars.map { |char| PLANTS[char] }
-  end
-
-  def assign_cups(cups, students)
+  def enumerate_students_with_cups(diagram, students)
     students.
       each_with_index.
-      take_while { |student, index| index < (cups.first.size / 2) }.
-      each_with_object({}) do |(student, index), assigned_cups|
-        assigned_cups[student_method_name(student)] = plants(cups, index)
-      end
+      take_while { |student, index| index < (diagram.cups_per_row / CUPS_PER_STUDENT_PER_ROW) }
   end
 
   def student_method_name(student)
     student.downcase
   end
 
-  def plants(cups, index)
-    offset = index * 2
-    cups[0][offset, 2] + cups[1][offset, 2]
+  def cups_for_student(diagram, index)
+    (0...ROWS).inject([]) do |cups, row|
+      cups + diagram.take_cups(row, index, CUPS_PER_STUDENT_PER_ROW)
+    end
   end
 
 end
