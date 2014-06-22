@@ -1,7 +1,7 @@
 
 class Robot
 
-  attr_reader :bearing, :coordinates
+  attr_reader :bearing
 
   BEARINGS = [:north, :east, :south, :west]
   RIGHT    = +1
@@ -14,8 +14,26 @@ class Robot
     :west  => [-1, 0],
   }
 
+  class Coordinates
+
+    attr_reader :x, :y
+
+    def initialize(x, y)
+      @x, @y = x, y
+    end
+
+    def move(horizontally, vertically)
+      Coordinates.new(@x + horizontally, @y + vertically)
+    end
+
+    def to_a
+      [@x, @y]
+    end
+
+  end
+
   def initialize
-    @coordinates = [0, 0]
+    @coordinates = Coordinates.new(0, 0)
     @bearing     = :north
   end
 
@@ -36,13 +54,16 @@ class Robot
   end
 
   def at(x, y)
-    @coordinates = [x, y]
+    @coordinates = Coordinates.new(x ,y)
     self
   end
 
+  def coordinates
+    @coordinates.to_a
+  end
+
   def advance
-    @coordinates[0] += movement[0]
-    @coordinates[1] += movement[1]
+    @coordinates = @coordinates.move(*movement)
     self
   end
 
