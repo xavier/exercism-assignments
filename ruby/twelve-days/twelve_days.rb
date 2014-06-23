@@ -37,9 +37,8 @@ class TwelveDaysSong
 
   def gifts(verse_index)
     s = ""
-    while verse_index > 0 do
-      s += VERSES[verse_index].gift + ", "
-      verse_index -= 1
+    verse_index.downto(1) do |n|
+      s += VERSES[n].gift + ", "
     end
     s += "and " unless s.empty?
     s += VERSES[0].gift
