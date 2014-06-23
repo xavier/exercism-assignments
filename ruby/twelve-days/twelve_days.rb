@@ -1,5 +1,7 @@
 class TwelveDaysSong
 
+  VerseDefinition = Struct.new(:nth, :gift)
+
   VERSES = [
     ["first", "a Partridge in a Pear Tree"],
     ["second", "two Turtle Doves"],
@@ -13,9 +15,9 @@ class TwelveDaysSong
     ["tenth", "ten Lords-a-Leaping"],
     ["eleventh", "eleven Pipers Piping"],
     ["twelfth", "twelve Drummers Drumming"]
-  ]
+  ].map { |args| VerseDefinition.new(*args) }
 
-  TEMPLATE = "On the %{nth} day of Christmas my true love gave to me, %{stuff}.\n"
+  TEMPLATE = "On the %{nth} day of Christmas my true love gave to me, %{gifts}.\n"
 
   def sing
     verses(1, VERSES.size)
@@ -26,20 +28,21 @@ class TwelveDaysSong
   end
 
   def verse(n)
-    nth, stuff = VERSES[n.pred]
-    TEMPLATE % {nth: nth, stuff: stuff(n.pred)}
+    verse_index      = n.pred
+    verse_definition = VERSES[verse_index]
+    TEMPLATE % {nth: verse_definition.nth, gifts: gifts(verse_index)}
   end
 
   private
 
-  def stuff(n)
+  def gifts(verse_index)
     s = ""
-    while n > 0 do
-      s += VERSES[n][1] + ", "
-      n -= 1
+    while verse_index > 0 do
+      s += VERSES[verse_index].gift + ", "
+      verse_index -= 1
     end
     s += "and " unless s.empty?
-    s += VERSES[0][1]
+    s += VERSES[0].gift
   end
 
 end
