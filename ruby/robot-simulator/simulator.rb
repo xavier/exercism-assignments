@@ -80,7 +80,7 @@ class Robot
   private
 
   def turn(direction)
-    @bearing = BEARINGS[(@bearing.index+ direction) % BEARINGS.size]
+    @bearing = BEARINGS[(@bearing.index + direction) % BEARINGS.size]
   end
 
 end
