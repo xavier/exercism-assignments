@@ -27,13 +27,10 @@ defmodule Atbash do
 
   @cipher_range ?a..?z
 
-  defp cipher_char(char_code) do
-    if Enum.member?(@cipher_range, char_code) do
-      @cipher_range.last - (char_code - @cipher_range.first)
-    else
-      char_code
-    end
+  defp cipher_char(char_code) when char_code in @cipher_range do
+    @cipher_range.last - (char_code - @cipher_range.first)
   end
+  defp cipher_char(char_code), do: char_code
 
   defp format(string) do
     String.strip(Regex.replace(~r/(.....)/, string, "\\1 "))
