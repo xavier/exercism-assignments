@@ -2,14 +2,12 @@
 class CustomSet
 
   def initialize(collection = [])
-    @set = Array(collection).sort.uniq
+    @set = collection.each_with_object({}) { |item, h| h[item] = true }
   end
 
-  def elements
-    @set
+  def to_list
+    @set.keys
   end
-
-  alias_method :to_list, :elements
 
   def size
     @set.count
@@ -20,14 +18,14 @@ class CustomSet
   end
 
   def member?(element)
-    @set.any? { |e| e.eql?(element) }
+    @set.has_key?(element)
   end
 
   def put(element)
     if member?(element)
       self
     else
-      CustomSet.new(elements << element)
+      CustomSet.new(to_list << element)
     end
   end
 
@@ -36,19 +34,19 @@ class CustomSet
   end
 
   def delete(element)
-    CustomSet.new(elements - [element])
+    CustomSet.new(to_list - [element])
   end
 
   def difference(other)
-    CustomSet.new(elements - other.elements)
+    CustomSet.new(to_list - other.to_list)
   end
 
   def intersection(other)
-    CustomSet.new(elements & other.elements)
+    CustomSet.new(to_list & other.to_list)
   end
 
   def union(other)
-    CustomSet.new(elements | other.elements)
+    CustomSet.new(to_list | other.to_list)
   end
 
   def subset?(other)
@@ -60,7 +58,7 @@ class CustomSet
   end
 
   def ==(other)
-    self.elements == other.elements
+    self.to_list.sort == other.to_list.sort
   end
 
 end
