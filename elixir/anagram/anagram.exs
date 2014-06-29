@@ -9,11 +9,11 @@ defmodule Anagram do
 
   defp anagram_matcher(word) do
     normalized_word = normalize(word)
-    comparable_word = make_comparable(normalized_word)
+    comparable_word = comparable(normalized_word)
     fn (candidate) ->
       normalized_candidate = normalize(candidate)
       normalized_candidate != normalized_word
-        && make_comparable(normalized_candidate) == comparable_word
+        && comparable(normalized_candidate) == comparable_word
     end
   end
 
@@ -21,7 +21,7 @@ defmodule Anagram do
     String.downcase(word)
   end
 
-  defp make_comparable(normalized_word) do
+  defp comparable(normalized_word) do
     normalized_word |> String.graphemes |> Enum.sort
   end
 
