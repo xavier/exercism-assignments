@@ -4,24 +4,24 @@ defmodule Anagram do
   """
   @spec match(String.t, [String.t]) :: [String.t]
   def match(base, candidates) do
-    candidates |> Enum.filter _anagram_matcher(base)
+    candidates |> Enum.filter anagram_matcher(base)
   end
 
-  defp _anagram_matcher(word) do
-    normalized_word = _normalize(word)
-    comparable_word = _make_comparable(normalized_word)
+  defp anagram_matcher(word) do
+    normalized_word = normalize(word)
+    comparable_word = make_comparable(normalized_word)
     fn (candidate) ->
-      normalized_candidate = _normalize(candidate)
+      normalized_candidate = normalize(candidate)
       normalized_candidate != normalized_word
-        && _make_comparable(normalized_candidate) == comparable_word
+        && make_comparable(normalized_candidate) == comparable_word
     end
   end
 
-  defp _normalize(word) do
+  defp normalize(word) do
     String.downcase(word)
   end
 
-  defp _make_comparable(normalized_word) do
+  defp make_comparable(normalized_word) do
     normalized_word |> String.graphemes |> Enum.sort
   end
 
