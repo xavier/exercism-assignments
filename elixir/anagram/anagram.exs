@@ -4,7 +4,7 @@ defmodule Anagram do
   """
   @spec match(String.t, [String.t]) :: [String.t]
   def match(base, candidates) do
-    candidates |> Enum.filter anagram_matcher(base)
+    Enum.filter candidates, anagram_matcher(base)
   end
 
   defp anagram_matcher(word) do
