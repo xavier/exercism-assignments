@@ -7,11 +7,15 @@ defmodule Gigasecond do
   @seconds 1_000_000_000
 
 	def from(date = {_year, _month, _day}) do
-    seconds_to_date(date_to_seconds(date) + @seconds)
+    date |> date_to_seconds |> advance |> seconds_to_date
 	end
 
   defp date_to_seconds(date) do
     :calendar.datetime_to_gregorian_seconds({date, {0, 0, 0}})
+  end
+
+  defp advance(seconds) do
+    seconds + @seconds
   end
 
   defp seconds_to_date(seconds) do
