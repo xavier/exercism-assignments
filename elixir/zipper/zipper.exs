@@ -70,9 +70,9 @@ defmodule Zipper do
     %Z{z | focus: walk_up_to_parent(z.root, Enum.reverse(z.trail))}
   end
 
-  defp walk_up_to_parent(tree, []), do: nil
-  defp walk_up_to_parent(tree, [_]), do: tree
-  defp walk_up_to_parent(tree, [:left|trail]), do: walk_up_to_parent(tree.left, trail)
+  defp walk_up_to_parent(tree, []),             do: nil
+  defp walk_up_to_parent(tree, [_]),            do: tree
+  defp walk_up_to_parent(tree, [:left|trail]),  do: walk_up_to_parent(tree.left, trail)
   defp walk_up_to_parent(tree, [:right|trail]), do: walk_up_to_parent(tree.right, trail)
 
   # @doc """
@@ -84,10 +84,10 @@ defmodule Zipper do
     %Z{z | focus: new_focus, root: rebuild(z.root, Enum.reverse(z.trail), new_focus)}
   end
 
-  defp rebuild(tree, [], new_subtree), do: new_subtree
-  defp rebuild(tree, [:left], new_subtree), do: %BT{tree | left: new_subtree}
-  defp rebuild(tree, [:right], new_subtree), do: %BT{tree | right: new_subtree}
-  defp rebuild(tree, [:left|trail], new_subtree), do: rebuild(tree.left, trail, new_subtree)
+  defp rebuild(tree, [], new_subtree),             do: new_subtree
+  defp rebuild(tree, [:left], new_subtree),        do: %BT{tree | left: new_subtree}
+  defp rebuild(tree, [:right], new_subtree),       do: %BT{tree | right: new_subtree}
+  defp rebuild(tree, [:left|trail], new_subtree),  do: rebuild(tree.left, trail, new_subtree)
   defp rebuild(tree, [:right|trail], new_subtree), do: rebuild(tree.right, trail, new_subtree)
 
   # @doc """
