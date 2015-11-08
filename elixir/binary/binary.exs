@@ -6,14 +6,14 @@ defmodule Binary do
   """
   @spec to_decimal(String.t) :: non_neg_integer
   def to_decimal(string) do
-    String.codepoints(string) |> Enum.reduce 0, &accumulate_bits/2
+    _to_decimal(string, 0)
   end
 
-  defp accumulate_bits(bit, accumulator) do
-    accumulator * 2 + bit_value(bit)
-  end
+  defp _to_decimal("", acc), do: acc
+  defp _to_decimal("0" <> tail, acc), do: _to_decimal(tail, shift(acc))
+  defp _to_decimal("1" <> tail, acc), do: _to_decimal(tail, shift(acc) + 1)
+  defp _to_decimal(_, _acc), do: 0
 
-  defp bit_value("1"), do: 1
-  defp bit_value(_),   do: 0
+  defp shift(acc), do: 2 * acc
 
 end
